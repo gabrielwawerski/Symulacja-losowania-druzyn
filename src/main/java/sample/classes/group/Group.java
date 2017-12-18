@@ -24,5 +24,13 @@ public class Group {
             this.team = team;
             score = new Score();
         }
+
+        public Team getTeam() {
+            return team;
+        }
+
+        public Score getScore() {
+            return score;
+        }
     }
 }
