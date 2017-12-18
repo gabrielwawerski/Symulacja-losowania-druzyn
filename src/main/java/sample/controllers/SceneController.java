@@ -46,6 +46,8 @@ public class SceneController implements Initializable {
     private ListView groupF;
     @FXML
     private ListView groupG;
+    @FXML
+    private ListView groupH;
 
 
     @Override
