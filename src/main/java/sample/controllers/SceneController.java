@@ -38,8 +38,21 @@ public class SceneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //        initializeTeams();
-        ObservableList<String> names = FXCollections.observableArrayList("asd", "dsa");
-        basket1.setItems(names);
+        ObservableList<String> namesBasket1 = FXCollections.observableArrayList("Rosja", "Niemcy", "Brazylia",
+                "Portugalia", "Argentyna", "Belgia", "Polska", "Francja");
+        basket1.setItems(namesBasket1);
+
+        ObservableList<String> namesBasket2 = FXCollections.observableArrayList("Hiszpania", "Peru", "Szwajcaria",
+                "Anglia", "Kolumbia", "Meksyk", "Urugwaj", "Chorwacja");
+        basket2.setItems(namesBasket2);
+
+        ObservableList<String> namesBasket3 = FXCollections.observableArrayList("Dania", "Islandia", "Kostaryka",
+                "Szwecja", "Tunezja", "Egipt", "Senegal", "Iran");
+        basket3.setItems(namesBasket3);
+
+        ObservableList<String> namesBasket4 = FXCollections.observableArrayList("Serbia", "Nigeria", "Australia",
+                "Japonia", "Maroko", "Panama", "Korea Południowa", "Arabia Saudyjska");
+        basket4.setItems(namesBasket4);
     }
 
     private void initializeTeams() {

@@ -11,4 +11,17 @@
 	-fx-font-weight: 700;
 }
 
+.list-view .list-cell:even
+{
+    -fx-background-color:  #F0FFF0;
+    -fx-text-fill: black;
+    -font-weight: 700;
+}
+
+.list-view .list-cell:odd
+{
+    -fx-background-color: #E0EEE0;
+    -fx-text-fill: black;
+
+}
 
