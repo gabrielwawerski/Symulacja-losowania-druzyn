@@ -6,6 +6,9 @@ public class Score {
     private int goalsLost;
 
     public Score() {
+        points = 0;
+        goalsScored = 0;
+        goalsLost = 0;
     }
 
     public int getPoints() {
