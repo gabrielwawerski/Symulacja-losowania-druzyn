@@ -16,19 +16,21 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("/forms/Scene.fxml"));
+
 
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        final double width = primaryScreenBounds.getMinX();
-        final double height = primaryScreenBounds.getMinY();
+        final double WIDTH = primaryScreenBounds.getMinX();
+        final double HEIGHT = primaryScreenBounds.getMinY();
 
-        root.setLayoutX(width);
-        root.setLayoutY(height);
+        Parent root = FXMLLoader.load(getClass().getResource("/forms/Scene.fxml"));
+        root.setLayoutX(WIDTH);
+        root.setLayoutY(HEIGHT);
 
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Wylosuj grupy na Mundial!");
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root, width, height));
+        primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
         primaryStage.show();
+
     }
 
 

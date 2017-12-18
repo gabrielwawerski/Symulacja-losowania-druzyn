@@ -1,0 +1,15 @@
+.root
+{
+    -fx-background-color:  #006400;
+	-fx-font-family: "Verdana";
+}
+
+.button
+{
+	-fx-base:  	#000000;
+	-fx-font-size: 12px;
+	-fx-font-weight: 700;
+}
+
+
+

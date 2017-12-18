@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.SceneController">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.SceneController">
       <HBox fx:id="hboxKoszyki" alignment="CENTER" prefHeight="126.0" prefWidth="600.0" spacing="10.0">
             <ListView fx:id="koszyk1" prefHeight="200.0" prefWidth="200.0" />
             <ListView fx:id="koszyk2" prefHeight="200.0" prefWidth="200.0" />
@@ -17,9 +17,9 @@
       </VBox.margin>
       </HBox>
       <HBox alignment="CENTER" prefHeight="63.0" prefWidth="600.0" spacing="8.0">
-            <Button fx:id="drawButton" mnemonicParsing="false" onAction="#handleDrawButton" text="Losowanie" />
-            <Button fx:id="quickDrawButton" mnemonicParsing="false" onAction="#handleQuickDrawButton" text="Szybkie losowanie" />
-            <Button fx:id="resetButton" mnemonicParsing="false" onAction="#handleResetButton" text="Reset" />
+            <Button fx:id="drawButton" mnemonicParsing="false" onAction="#handleDrawButton" prefHeight="50.0" prefWidth="150.0" text="Losowanie" />
+            <Button fx:id="quickDrawButton" mnemonicParsing="false" onAction="#handleQuickDrawButton" prefHeight="50.0" prefWidth="150.0" text="Szybkie losowanie" />
+            <Button fx:id="resetButton" mnemonicParsing="false" onAction="#handleResetButton" prefHeight="50.0" prefWidth="150.0" text="Reset" />
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
