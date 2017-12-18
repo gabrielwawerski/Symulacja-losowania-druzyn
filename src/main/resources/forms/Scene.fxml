@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.SceneController">
+<VBox alignment="CENTER" spacing="10.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.SceneController">
       <HBox fx:id="hboxKoszyki" alignment="CENTER" prefHeight="126.0" prefWidth="600.0" spacing="10.0">
-            <ListView fx:id="basket1" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
-            <ListView fx:id="basket2" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
-            <ListView fx:id="basket3" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
-            <ListView fx:id="basket4" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="basket1" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="basket2" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="basket3" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="basket4" prefHeight="200.0" prefWidth="200.0" />
       <VBox.margin>
          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
       </VBox.margin>
@@ -29,19 +29,18 @@
       </HBox>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="600.0">
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                  <ListView fx:id="groupA" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
-                  <ListView fx:id="groupB" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
-                  <ListView fx:id="groupC" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
-                  <ListView fx:id="groupD" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="groupA" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="groupB" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="groupC" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="groupD" prefHeight="200.0" prefWidth="200.0" />
          <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                  <ListView fx:id="groupE" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
-                  <ListView fx:id="groupF" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
-                  <ListView fx:id="groupG" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
-                  <ListView fx:id="groupH" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="groupE" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="groupF" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="groupG" prefHeight="200.0" prefWidth="200.0" />
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" />
          </padding>
