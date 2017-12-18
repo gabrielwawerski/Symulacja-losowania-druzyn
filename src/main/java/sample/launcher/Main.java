@@ -18,6 +18,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/forms/Scene.fxml"));
 
         primaryStage.setTitle("Wylosuj grupy na Mundial!");
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);
         primaryStage.show();
     }
