@@ -10,16 +10,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import sample.controllers.SceneController;
 
-
-
-
 public class Main extends Application {
-
-
     @Override
     public void start(Stage primaryStage) throws Exception{
-
-
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         final double WIDTH = primaryScreenBounds.getMinX();
         final double HEIGHT = primaryScreenBounds.getMinY();
@@ -32,14 +25,9 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
         primaryStage.show();
-
     }
-
 
     public static void main(String[] args) {
         launch(args);
-
     }
-
-
 }

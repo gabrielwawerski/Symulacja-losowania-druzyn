@@ -16,38 +16,23 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SceneController implements Initializable {
-    @FXML
-    private ListView<String> basket1;
-    @FXML
-    private ListView basket2;
-    @FXML
-    private ListView basket3;
-    @FXML
-    private ListView basket4;
+    @FXML private ListView<String> basket1;
+    @FXML private ListView<String> basket2;
+    @FXML private ListView<String> basket3;
+    @FXML private ListView<String> basket4;
 
-    @FXML
-    private Button drawButton;
-    @FXML
-    private Button quickDrawButton;
-    @FXML
-    private Button resetButton;
+    @FXML private Button drawButton;
+    @FXML private Button quickDrawButton;
+    @FXML private Button resetButton;
 
-    @FXML
-    private ListView groupA;
-    @FXML
-    private ListView groupB;
-    @FXML
-    private ListView groupC;
-    @FXML
-    private ListView groupD;
-    @FXML
-    private ListView groupE;
-    @FXML
-    private ListView groupF;
-    @FXML
-    private ListView groupG;
-    @FXML
-    private ListView groupH;
+    @FXML private ListView<String> groupA;
+    @FXML private ListView<String> groupB;
+    @FXML private ListView<String> groupC;
+    @FXML private ListView<String> groupD;
+    @FXML private ListView<String> groupE;
+    @FXML private ListView<String> groupF;
+    @FXML private ListView<String> groupG;
+    @FXML private ListView<String> groupH;
 
 
     @Override
@@ -59,7 +44,6 @@ public class SceneController implements Initializable {
 
     private void initializeTeams() {
     }
-
     
     @FXML
     protected void handleDrawButton() {
