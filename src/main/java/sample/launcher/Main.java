@@ -21,6 +21,7 @@ public class Main extends Application {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         final double width = primaryScreenBounds.getMinX();
         final double height = primaryScreenBounds.getMinY();
+
         root.setLayoutX(width);
         root.setLayoutY(height);
 
