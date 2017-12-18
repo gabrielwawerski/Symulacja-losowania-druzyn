@@ -13,17 +13,12 @@ import sample.controllers.SceneController;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        final double WIDTH = primaryScreenBounds.getMinX();
-        final double HEIGHT = primaryScreenBounds.getMinY();
+
 
         Parent root = FXMLLoader.load(getClass().getResource("/forms/Scene.fxml"));
-        root.setLayoutX(WIDTH);
-        root.setLayoutY(HEIGHT);
 
         primaryStage.setTitle("Wylosuj grupy na Mundial!");
-        primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
+        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
