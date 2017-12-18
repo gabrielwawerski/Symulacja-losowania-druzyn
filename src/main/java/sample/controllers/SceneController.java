@@ -3,10 +3,12 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 
 public class SceneController {
+
     @FXML
-    private ListView basket1;
+    private ListView koszyk1;
     @FXML
     private ListView basket2;
     @FXML
@@ -20,6 +22,8 @@ public class SceneController {
     private Button quickDrawButton;
     @FXML
     private Button resetButton;
+    @FXML
+    private Button generate;
 
     @FXML
     private ListView groupA;
@@ -47,5 +51,12 @@ public class SceneController {
 
     @FXML
     protected void handleResetButton() {
+    }
+
+    @FXML
+    public void generateTeams()
+    {
+        koszyk1.getItems().addAll("asdasd", "asdasd", "asdas");
+        koszyk1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 }
