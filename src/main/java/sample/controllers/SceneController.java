@@ -98,10 +98,12 @@ public class SceneController implements Initializable {
                 rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[j]));
                 nameDrawn = namesTeamsInBasket[j].get(rand);
                 //namesTeamsInGroup[i].add(nameDrawn);
+                System.out.println(nameDrawn);
                 namesTeamsInBasket[j].remove(rand);
                 numberOfTeamsInBasket[j]--;
 
             }
+            System.out.println();
         }
 
     }
