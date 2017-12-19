@@ -82,25 +82,25 @@
          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
             <children>
                <Label alignment="CENTER" contentDisplay="CENTER" text="Grupa E" />
-               <ListView prefHeight="200.0" prefWidth="200.0" />
+               <ListView fx:id="groupE" prefHeight="200.0" prefWidth="200.0" />
             </children>
          </VBox>
          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
             <children>
                <Label alignment="CENTER" contentDisplay="CENTER" text="Grupa F" />
-                        <ListView fx:id="groupE" prefHeight="200.0" prefWidth="200.0" />
-            </children>
-         </VBox>
-         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
-            <children>
-               <Label alignment="CENTER" contentDisplay="CENTER" text="Grupa G" />
                         <ListView fx:id="groupF" prefHeight="200.0" prefWidth="200.0" />
             </children>
          </VBox>
          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
             <children>
-               <Label alignment="CENTER" contentDisplay="CENTER" text="Grupa H" />
+               <Label alignment="CENTER" contentDisplay="CENTER" text="Grupa G" />
                         <ListView fx:id="groupG" prefHeight="200.0" prefWidth="200.0" />
+            </children>
+         </VBox>
+         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="10.0">
+            <children>
+               <Label alignment="CENTER" contentDisplay="CENTER" text="Grupa H" />
+                        <ListView fx:id="groupH" prefHeight="200.0" prefWidth="200.0" />
             </children>
          </VBox>
          <VBox.margin>
