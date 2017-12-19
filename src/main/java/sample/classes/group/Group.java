@@ -16,6 +16,13 @@ public class Group {
         teamBundle[3] = new TeamBundle(team4);
     }
 
+    public Team[] getAllTeams() {
+        Team[] teams = new Team[4];
+        for (int i = 0; i < teamBundle.length; i++)
+            teams[i] = teamBundle[i].getTeam();
+        return teams;
+    }
+
     private class TeamBundle {
         private Team team;
         private Score score;
