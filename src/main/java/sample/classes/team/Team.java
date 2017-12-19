@@ -5,13 +5,11 @@ import javafx.scene.image.Image;
 public class Team {
     private String name;
     private int rating;
-    private Image flag;
     private Continent continent;
 
-    public Team(String name, int rating, Image flag, Continent continent) {
+    public Team(String name, int rating, Continent continent) {
         this.name = name;
         this.rating = rating;
-        this.flag = flag;
         this.continent = continent;
     }
 
@@ -29,14 +27,6 @@ public class Team {
 
     public void setRating(int rating) {
         this.rating = rating;
-    }
-
-    public Image getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Image flag) {
-        this.flag = flag;
     }
 
     public Continent getContinent() {
