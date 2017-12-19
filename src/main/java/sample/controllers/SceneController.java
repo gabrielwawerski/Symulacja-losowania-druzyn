@@ -35,22 +35,28 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupH;
 
 
+    private ObservableList<String> namesBasket1 = null;
+    private ObservableList<String> namesBasket2 = null;
+    private ObservableList<String> namesBasket3 = null;
+    private ObservableList<String> namesBasket4 = null;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //        initializeTeams();
-        ObservableList<String> namesBasket1 = FXCollections.observableArrayList("Rosja", "Niemcy", "Brazylia",
+        namesBasket1 = FXCollections.observableArrayList("Rosja", "Niemcy", "Brazylia",
                 "Portugalia", "Argentyna", "Belgia", "Polska", "Francja");
         basket1.setItems(namesBasket1);
 
-        ObservableList<String> namesBasket2 = FXCollections.observableArrayList("Hiszpania", "Peru", "Szwajcaria",
+        namesBasket2 = FXCollections.observableArrayList("Hiszpania", "Peru", "Szwajcaria",
                 "Anglia", "Kolumbia", "Meksyk", "Urugwaj", "Chorwacja");
         basket2.setItems(namesBasket2);
 
-        ObservableList<String> namesBasket3 = FXCollections.observableArrayList("Dania", "Islandia", "Kostaryka",
+        namesBasket3 = FXCollections.observableArrayList("Dania", "Islandia", "Kostaryka",
                 "Szwecja", "Tunezja", "Egipt", "Senegal", "Iran");
         basket3.setItems(namesBasket3);
 
-        ObservableList<String> namesBasket4 = FXCollections.observableArrayList("Serbia", "Nigeria", "Australia",
+        namesBasket4 = FXCollections.observableArrayList("Serbia", "Nigeria", "Australia",
                 "Japonia", "Maroko", "Panama", "Korea Południowa", "Arabia Saudyjska");
         basket4.setItems(namesBasket4);
     }
@@ -64,6 +70,8 @@ public class SceneController implements Initializable {
 
     @FXML
     protected void handleQuickDrawButton() {
+
+
     }
 
     @FXML
