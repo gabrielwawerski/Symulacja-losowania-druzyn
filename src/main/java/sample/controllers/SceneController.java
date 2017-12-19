@@ -110,10 +110,11 @@ public class SceneController implements Initializable {
         groupA.setItems(namesTeamsInGroup[0]);
         groupB.setItems(namesTeamsInGroup[1]);
         groupC.setItems(namesTeamsInGroup[2]);
-        groupB.setItems(namesTeamsInGroup[3]);
-        groupD.setItems(namesTeamsInGroup[4]);
-        groupE.setItems(namesTeamsInGroup[5]);
-        groupF.setItems(namesTeamsInGroup[6]);
+        groupD.setItems(namesTeamsInGroup[3]);
+        groupE.setItems(namesTeamsInGroup[4]);
+        groupF.setItems(namesTeamsInGroup[5]);
+        groupG.setItems(namesTeamsInGroup[6]);
+        groupH.setItems(namesTeamsInGroup[7]);
 
     }
 
