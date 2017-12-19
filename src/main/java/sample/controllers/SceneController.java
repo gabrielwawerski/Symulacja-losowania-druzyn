@@ -2,13 +2,14 @@ package sample.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
 import java.net.URL;
-import java.sql.Time;
 import java.util.ResourceBundle;
 
 public class SceneController implements Initializable {
@@ -42,6 +43,13 @@ public class SceneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        setDefaultTeams();
+
+    }
+
+    private void setDefaultTeams()
+    {
+
         namesTeamsInBasket[0] = FXCollections.observableArrayList("Rosja", "Niemcy", "Brazylia",
                 "Portugalia", "Argentyna", "Belgia", "Polska", "Francja");
         basket1.setItems(namesTeamsInBasket[0]);
@@ -57,10 +65,6 @@ public class SceneController implements Initializable {
         namesTeamsInBasket[3] = FXCollections.observableArrayList("Serbia", "Nigeria", "Australia",
                 "Japonia", "Maroko", "Panama", "Korea Południowa", "Arabia Saudyjska");
         basket4.setItems(namesTeamsInBasket[3]);
-
-
-
-
     }
 
 
@@ -71,13 +75,14 @@ public class SceneController implements Initializable {
 
 
     @FXML
-    protected void handleQuickDrawButton() {
+    protected void handleQuickDrawButton()
+    {
 
         int [] numberOfTeamsInBasket = new int [4];
 
         for (int i = 0; i < numberOfBaskets ; i++)
         {
-            numberOfTeamsInBasket[i] = namesTeamsInBasket[i].size();
+            numberOfTeamsInBasket[i] = teamsInBasket;
         }
 
         for (int i = 0; i < teamsInBasket; i++)
@@ -85,26 +90,8 @@ public class SceneController implements Initializable {
             namesTeamsInGroup[i] = FXCollections.observableArrayList();
         }
 
-        int rand = 0;
-        String nameDrawn = "";
-
-        // next team in basket
-        for (int i = 0; i < teamsInBasket; i++)
-        {
-            //next basket
-            for (int j = 0; j < numberOfBaskets; j++)
-            {
-                rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[j]));
-                nameDrawn = namesTeamsInBasket[j].get(rand);
-
-                namesTeamsInGroup[i].add(j, nameDrawn);
-               System.out.println(nameDrawn);
-                namesTeamsInBasket[j].remove(rand);
-                numberOfTeamsInBasket[j]--;
-
-            }
-            System.out.println();
-        }
+        int rand;
+        String nameDrawn;
 
         // binding ObservableList with names of teams and ListView
         groupA.setItems(namesTeamsInGroup[0]);
@@ -116,10 +103,48 @@ public class SceneController implements Initializable {
         groupG.setItems(namesTeamsInGroup[6]);
         groupH.setItems(namesTeamsInGroup[7]);
 
+        // next team in basket
+        for (int i = 0; i < teamsInBasket; i++)
+        {
+            //next basket
+            for (int j = 0; j < numberOfBaskets; j++)
+            {
+                rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[j]));
+                nameDrawn = namesTeamsInBasket[j].get(rand);
+                namesTeamsInGroup[i].add(j, nameDrawn);
+                namesTeamsInBasket[j].remove(rand);
+                numberOfTeamsInBasket[j]--;
+
+            }
+
+            quickDrawButton.setOnAction(null);
+            quickDrawButton.setStyle("-fx-base: #444444; -fx-text-fill: #333333;");
+        }
+
+
+
     }
 
 
     @FXML
     protected void handleResetButton() {
+
+        setDefaultTeams();
+        cleanLists();
+        quickDrawButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                handleQuickDrawButton();
+            }
+        });
+
+        quickDrawButton.setStyle("-fx-base: #000000; -fx-text-fill: #FFFFFF;");
+    }
+
+    private void cleanLists()
+    {
+        for (int i = 0; i < teamsInBasket ; i++)
+        {
+            namesTeamsInGroup[i].clear();
+        }
     }
 }
