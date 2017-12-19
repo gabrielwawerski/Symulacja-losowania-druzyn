@@ -59,14 +59,7 @@ public class SceneController implements Initializable {
         basket4.setItems(namesTeamsInBasket[3]);
 
 
-        // binding ObservableList with names of teams and ListView
-        groupA.setItems(namesTeamsInGroup[0]);
-        groupB.setItems(namesTeamsInGroup[1]);
-        groupC.setItems(namesTeamsInGroup[2]);
-        groupB.setItems(namesTeamsInGroup[3]);
-        groupD.setItems(namesTeamsInGroup[4]);
-        groupE.setItems(namesTeamsInGroup[5]);
-        groupF.setItems(namesTeamsInGroup[6]);
+
 
     }
 
@@ -87,6 +80,11 @@ public class SceneController implements Initializable {
             numberOfTeamsInBasket[i] = namesTeamsInBasket[i].size();
         }
 
+        for (int i = 0; i < teamsInBasket; i++)
+        {
+            namesTeamsInGroup[i] = FXCollections.observableArrayList();
+        }
+
         int rand = 0;
         String nameDrawn = "";
 
@@ -98,8 +96,8 @@ public class SceneController implements Initializable {
             {
                 rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[j]));
                 nameDrawn = namesTeamsInBasket[j].get(rand);
-              // namesTeamsInGroup[i] = FXCollections.observableArrayList();
-              // namesTeamsInGroup[i].add(i, nameDrawn);
+
+                namesTeamsInGroup[i].add(j, nameDrawn);
                System.out.println(nameDrawn);
                 namesTeamsInBasket[j].remove(rand);
                 numberOfTeamsInBasket[j]--;
@@ -107,6 +105,15 @@ public class SceneController implements Initializable {
             }
             System.out.println();
         }
+
+        // binding ObservableList with names of teams and ListView
+        groupA.setItems(namesTeamsInGroup[0]);
+        groupB.setItems(namesTeamsInGroup[1]);
+        groupC.setItems(namesTeamsInGroup[2]);
+        groupB.setItems(namesTeamsInGroup[3]);
+        groupD.setItems(namesTeamsInGroup[4]);
+        groupE.setItems(namesTeamsInGroup[5]);
+        groupF.setItems(namesTeamsInGroup[6]);
 
     }
 
