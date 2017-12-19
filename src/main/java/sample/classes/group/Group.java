@@ -7,6 +7,10 @@ public class Group {
     private TeamBundle[] teamBundle;
 
     public Group() {
+        teamBundle[0] = new TeamBundle();
+        teamBundle[1] = new TeamBundle();
+        teamBundle[2] = new TeamBundle();
+        teamBundle[3] = new TeamBundle();
     }
 
     public Group(Team team1, Team team2, Team team3, Team team4) {
@@ -27,9 +31,17 @@ public class Group {
         private Team team;
         private Score score;
 
+        TeamBundle() {
+            score = new Score();
+        }
+
         TeamBundle(Team team) {
             this.team = team;
             score = new Score();
+        }
+
+        public void putTeam(Team team) {
+            this.team = team;
         }
 
         public Team getTeam() {
