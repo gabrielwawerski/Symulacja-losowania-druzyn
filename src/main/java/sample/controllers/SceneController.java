@@ -32,7 +32,8 @@ public class SceneController implements Initializable {
 
 
     private ObservableList<String>[] namesTeamsInBasket = new ObservableList[4]; //names of teams in each basket
-    private ObservableList<String>[] namesTeamsInGroup = new ObservableList[7]; //Array with names of teams in each group
+    private ObservableList<String>[] namesTeamsInGroup = new ObservableList[8]; //Array with names of teams in each
+    // group
 
     //should be more universal
     private final int teamsInBasket = 8;
@@ -97,8 +98,9 @@ public class SceneController implements Initializable {
             {
                 rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[j]));
                 nameDrawn = namesTeamsInBasket[j].get(rand);
-                //namesTeamsInGroup[i].add(nameDrawn);
-                System.out.println(nameDrawn);
+              // namesTeamsInGroup[i] = FXCollections.observableArrayList();
+              // namesTeamsInGroup[i].add(i, nameDrawn);
+               System.out.println(nameDrawn);
                 namesTeamsInBasket[j].remove(rand);
                 numberOfTeamsInBasket[j]--;
 
@@ -107,6 +109,7 @@ public class SceneController implements Initializable {
         }
 
     }
+
 
     @FXML
     protected void handleResetButton() {
