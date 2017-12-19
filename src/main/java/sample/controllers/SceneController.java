@@ -71,6 +71,10 @@ public class SceneController implements Initializable {
     @FXML
     protected void handleQuickDrawButton() {
 
+        int teamsInBasket1 = namesBasket1.size();
+        int teamsInBasket2 = namesBasket2.size();
+        int teamsInBasket3 = namesBasket3.size();
+        int teamsInBasket4 = namesBasket4.size();
 
     }
 
