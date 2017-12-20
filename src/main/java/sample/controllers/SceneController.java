@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SceneController implements Initializable {
+    // TODO? put baskets and groups into an array, for later letting the user to choose
+    // the number of baskets and groups and so that they can be iterated on?
     @FXML private ListView<String> basket1;
     @FXML private ListView<String> basket2;
     @FXML private ListView<String> basket3;
