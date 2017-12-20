@@ -13,14 +13,15 @@ import java.util.Collections;
  * // TODO receive ObservableLists to baskets and groups, draw teams and put them in baskets, ?then return?
  */
 public class Draw extends Service<Void> {
-    private ObservableList<String>[] baskets;
-    private ObservableList<String>[] groups;
-    private ArrayList<Team> teams;
+    public static ObservableList<String>[] baskets;
+    public static ObservableList<String>[] groups;
+    public static ArrayList<Team> teams;
 
-    public Draw(ObservableList<String>[] baskets, ObservableList<String>[] groups, ArrayList<Team> teams) {
-        this.baskets = baskets;
-        this.groups = groups;
-        this.teams = teams;
+    public static void injectFields(ObservableList<String>[] _baskets, ObservableList<String>[] _groups,
+                                    ArrayList<Team> _teams) {
+        baskets = _baskets;
+        groups = _groups;
+        teams = _teams;
     }
 
     @Override
