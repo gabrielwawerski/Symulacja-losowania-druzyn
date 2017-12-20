@@ -37,7 +37,7 @@ public class SceneController implements Initializable {
     // TODO check if it's okay to instantiate this way
     // arrays for observable lists that bind to baskets and groups ListView's
     private ObservableList<String>[] observableListBasket = new ObservableList[4];
-    private ObservableList<String>[] observableListGroup = new ObservableList[8]; // array with names of teams in each
+    private ObservableList<String>[] observableListGroup = new ObservableList[8];
     private Map<String, Team> teams;
     private Team host;
 
@@ -179,9 +179,9 @@ public class SceneController implements Initializable {
     }
 
     /**
-     * If the {@code value} argument is true, all draw buttons are disabled and their styles are changed to
-     * {@link #BUTTON_DISABLED_STYLE}, otherwise all buttons are enabled and their styles are
-     * changed to {@link #BUTTON_ENABLED_STYLE}.
+     * If the {@code value} argument is true, all draw buttons are disabled and their styles are
+     * changed to {@link #BUTTON_DISABLED_STYLE}, otherwise all buttons are enabled and their styles
+     * are changed to {@link #BUTTON_ENABLED_STYLE}.
      * @param value boolean that decides whether all draw buttons are disabled or enabled
      */
     private void disableAllDrawButtons(boolean value) {
