@@ -44,36 +44,6 @@ public class SceneController implements Initializable {
         setDefaultTeams();
     }
 
-    private void setDefaultTeams() {
-        namesOfTeamsInBasket[0]
-                = FXCollections.observableArrayList("Rosja", "Niemcy",
-                "Brazylia", "Portugalia",
-                "Argentyna", "Belgia",
-                "Polska", "Francja");
-        basket1.setItems(namesOfTeamsInBasket[0]);
-
-        namesOfTeamsInBasket[1]
-                = FXCollections.observableArrayList("Hiszpania", "Peru",
-                "Szwajcaria", "Anglia",
-                "Kolumbia", "Meksyk",
-                "Urugwaj", "Chorwacja");
-        basket2.setItems(namesOfTeamsInBasket[1]);
-
-        namesOfTeamsInBasket[2]
-                = FXCollections.observableArrayList("Dania", "Islandia",
-                "Kostaryka", "Szwecja",
-                "Tunezja", "Egipt",
-                "Senegal", "Iran");
-        basket3.setItems(namesOfTeamsInBasket[2]);
-
-        namesOfTeamsInBasket[3]
-                = FXCollections.observableArrayList("Serbia", "Nigeria",
-                "Australia", "Japonia",
-                "Maroko", "Panama",
-                "Korea Południowa", "Arabia Saudyjska");
-        basket4.setItems(namesOfTeamsInBasket[3]);
-    }
-
     @FXML
     protected void handleDrawButton() {
     }
@@ -119,11 +89,6 @@ public class SceneController implements Initializable {
         setUnableStyleAndOnAction(drawButton);
     }
 
-    private void setUnableStyleAndOnAction(Button button) {
-        button.setOnAction(null);
-        quickDrawButton.setStyle("-fx-base: #444444; -fx-text-fill: #333333;");
-    }
-
     @FXML
     protected void handleResetButton() {
         setDefaultTeams();
@@ -139,6 +104,41 @@ public class SceneController implements Initializable {
 
         quickDrawButton.setStyle("-fx-base: #000000; -fx-text-fill: #FFFFFF;");
         drawButton.setStyle("-fx-base: #000000; -fx-text-fill: #FFFFFF;");
+    }
+
+    private void setDefaultTeams() {
+        namesOfTeamsInBasket[0]
+                = FXCollections.observableArrayList("Rosja", "Niemcy",
+                "Brazylia", "Portugalia",
+                "Argentyna", "Belgia",
+                "Polska", "Francja");
+        basket1.setItems(namesOfTeamsInBasket[0]);
+
+        namesOfTeamsInBasket[1]
+                = FXCollections.observableArrayList("Hiszpania", "Peru",
+                "Szwajcaria", "Anglia",
+                "Kolumbia", "Meksyk",
+                "Urugwaj", "Chorwacja");
+        basket2.setItems(namesOfTeamsInBasket[1]);
+
+        namesOfTeamsInBasket[2]
+                = FXCollections.observableArrayList("Dania", "Islandia",
+                "Kostaryka", "Szwecja",
+                "Tunezja", "Egipt",
+                "Senegal", "Iran");
+        basket3.setItems(namesOfTeamsInBasket[2]);
+
+        namesOfTeamsInBasket[3]
+                = FXCollections.observableArrayList("Serbia", "Nigeria",
+                "Australia", "Japonia",
+                "Maroko", "Panama",
+                "Korea Południowa", "Arabia Saudyjska");
+        basket4.setItems(namesOfTeamsInBasket[3]);
+    }
+
+    private void setUnableStyleAndOnAction(Button button) {
+        button.setOnAction(null);
+        quickDrawButton.setStyle("-fx-base: #444444; -fx-text-fill: #333333;");
     }
 
     private void cleanLists() {
