@@ -58,6 +58,7 @@ public class SceneController implements Initializable {
             numberOfTeamsInBasket[i] = TEAMS_IN_BASKET;
         }
 
+        // instantiate all ObservableLists for team names in groups
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
             teamNamesInGroup[i] = FXCollections.observableArrayList();
         }
