@@ -140,11 +140,11 @@ public class SceneController implements Initializable {
     }
 
     /**
-     * Sets the button style to one chosen by caller. Available styles:
+     * Sets style of a button. Available styles:
      * <br>{@link SceneController#BUTTON_ENABLED_STYLE}
      * <br>{@link SceneController#BUTTON_DISABLED_STYLE}
-     * @param button the button that will have it's style set
-     * @param STYLE the style to set the button to
+     * @param button button to apply the style to
+     * @param STYLE the style to apply to the button
      */
     private void setButtonStyle(Button button, String STYLE) {
         quickDrawButton.setStyle(STYLE);
