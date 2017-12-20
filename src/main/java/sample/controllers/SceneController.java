@@ -39,6 +39,10 @@ public class SceneController implements Initializable {
     private static final int NUMBER_OF_BASKETS = 4; // the amount of baskets
     private static final int TEAMS_IN_BASKET = 8; // the amount of teams in a single basket
 
+    // styles for different button states
+    private static final String BUTTON_DISABLED_STYLE = "-fx-base: #444444; -fx-text-fill: #333333;";
+    private static final String BUTTON_ENABLED_STYLE = "-fx-base: #000000; -fx-text-fill: #FFFFFF;";
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setDefaultTeams();
@@ -79,7 +83,7 @@ public class SceneController implements Initializable {
                 rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[i]));
                 nameDrawn = teamNamesInBasket[i].get(rand);
                 System.out.print(nameDrawn + " ");
-                Thread.sleep(500);
+                Thread.sleep(100);
                 teamNamesInGroup[j].add(i, nameDrawn);
                 teamNamesInBasket[i].remove(rand);
                 numberOfTeamsInBasket[i]--;
@@ -103,8 +107,8 @@ public class SceneController implements Initializable {
                 }
         });
 
-        quickDrawButton.setStyle("-fx-base: #000000; -fx-text-fill: #FFFFFF;");
-        drawButton.setStyle("-fx-base: #000000; -fx-text-fill: #FFFFFF;");
+        quickDrawButton.setStyle(BUTTON_ENABLED_STYLE);
+        drawButton.setStyle(BUTTON_ENABLED_STYLE);
     }
 
     private void setDefaultTeams() {
@@ -139,7 +143,7 @@ public class SceneController implements Initializable {
 
     private void setUnableStyleAndOnAction(Button button) {
         button.setOnAction(null);
-        quickDrawButton.setStyle("-fx-base: #444444; -fx-text-fill: #333333;");
+        quickDrawButton.setStyle(BUTTON_DISABLED_STYLE);
     }
 
     private void cleanLists() {
