@@ -6,6 +6,7 @@ import javafx.concurrent.Task;
 import sample.classes.team.Team;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Needed in order to use variables
@@ -27,12 +28,16 @@ public class Draw extends Service<Void> {
         return new Task<Void>() {
             @Override
             protected Void call() {
-                // 1. wlozenie druzyn do koszykow
-                // 2. losowanie i zapelnianie grup
+                Collections.sort(teams);
+                Collections.reverse(teams);
+
+                for (String x : baskets)
+
+                // 1. posortowanie druzyn malejaco ratingiem
+                // 2. wlozenie druzyn do koszykow
+                // 3. losowanie i zapelnianie grup
                 return null;
             }
         };
     }
-
-
 }
