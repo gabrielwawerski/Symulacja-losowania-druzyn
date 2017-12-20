@@ -144,8 +144,8 @@ public class SceneController implements Initializable {
 
     /**
      * Sets style of a button. Available styles:
-     * <br>{@link SceneController#BUTTON_ENABLED_STYLE}
-     * <br>{@link SceneController#BUTTON_DISABLED_STYLE}
+     * <br>{@linkplain #BUTTON_ENABLED_STYLE}
+     * <br>{@linkplain #BUTTON_DISABLED_STYLE}
      * @param button button to apply the style to
      * @param STYLE the style to apply to the button
      */
@@ -155,8 +155,8 @@ public class SceneController implements Initializable {
 
     /**
      * Sets the style of buttons array. Available styles:
-     * <br>{@link SceneController#BUTTON_ENABLED_STYLE}
-     * <br>{@link SceneController#BUTTON_DISABLED_STYLE}
+     * <br>{@linkplain #BUTTON_ENABLED_STYLE}
+     * <br>{@linkplain #BUTTON_DISABLED_STYLE}
      * @param STYLE the style to apply to all buttons
      * @param buttons buttons to apply the style to
      */
