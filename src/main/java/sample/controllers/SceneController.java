@@ -122,6 +122,7 @@ public class SceneController implements Initializable {
         return host;
     }
 
+    @Deprecated
     private void setDefaultTeams() {
         observableListBasket[0]
                 = FXCollections.observableArrayList("Rosja", "Niemcy",
