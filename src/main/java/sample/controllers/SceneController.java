@@ -56,13 +56,9 @@ public class SceneController implements Initializable {
 
     @FXML
     protected void handleQuickDrawButton() throws InterruptedException {
-        int[] numberOfTeamsInBasket = new int[4];
+        int nextTeam = 8;
         int rand;
         String nameDrawn;
-
-        for (int i = 0; i < NUMBER_OF_BASKETS; i++) {
-            numberOfTeamsInBasket[i] = TEAMS_IN_BASKET;
-        }
 
         // instantiate all ObservableLists for team names in groups
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
@@ -82,16 +78,18 @@ public class SceneController implements Initializable {
         // next team in basket
         for (int i = 0; i < NUMBER_OF_BASKETS; i++) {
             for (int j = 0; j < TEAMS_IN_BASKET; j++) {
-                rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[i]));
+                rand = (int)(Math.floor(Math.random() * nextTeam));
                 nameDrawn = teamNamesInBasket[i].get(rand);
                 System.out.print(nameDrawn + " ");
                 Thread.sleep(100);
                 teamNamesInGroup[j].add(i, nameDrawn);
                 teamNamesInBasket[i].remove(rand);
-                numberOfTeamsInBasket[i]--;
+                nextTeam--;
             }
+            nextTeam = 8;
             System.out.println();
         }
+
         setDisableDrawButtons(true);
         setButtonsStyle(BUTTON_DISABLED_STYLE, drawButton, quickDrawButton);
     }
