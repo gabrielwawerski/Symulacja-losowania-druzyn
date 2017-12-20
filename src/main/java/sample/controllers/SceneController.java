@@ -65,6 +65,8 @@ public class SceneController implements Initializable {
         int rand;
         String nameDrawn;
 
+        disableAllDrawButtons(true);
+
         // instantiate all ObservableLists for team names in groups
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
             observableListGroup[i] = FXCollections.observableArrayList();
@@ -79,17 +81,14 @@ public class SceneController implements Initializable {
         groupF.setItems(observableListGroup[5]);
         groupG.setItems(observableListGroup[6]);
         groupH.setItems(observableListGroup[7]);
-
-        setDisableDrawButtons(true);
-        setButtonsStyle(BUTTON_DISABLED_STYLE, drawButton, quickDrawButton);
     }
 
     @FXML
     protected void handleResetButton() {
         setDefaultTeams();
         cleanLists();
-        setDisableDrawButtons(false);
-        setButtonsStyle(BUTTON_ENABLED_STYLE, drawButton, quickDrawButton);
+
+        disableAllDrawButtons(false);
     }
 
     private void initializeFields() {
@@ -191,6 +190,22 @@ public class SceneController implements Initializable {
     private void setDisableDrawButtons(boolean state) {
         drawButton.setDisable(state);
         quickDrawButton.setDisable(state);
+    }
+
+    /**
+     * If the {@code value} argument is true, all draw buttons are disabled and their styles are changed to
+     * {@link #BUTTON_DISABLED_STYLE}, otherwise all buttons are enabled and their styles are
+     * changed to {@link #BUTTON_ENABLED_STYLE}.
+     * @param value boolean that decides whether all draw buttons are disabled or enabled
+     */
+    private void disableAllDrawButtons(boolean value) {
+        if (value) {
+            setDisableDrawButtons(true);
+            setButtonsStyle(BUTTON_DISABLED_STYLE, drawButton, quickDrawButton);
+            return;
+        }
+        setDisableDrawButtons(false);
+        setButtonsStyle(BUTTON_ENABLED_STYLE, drawButton, quickDrawButton);
     }
 
     /**
