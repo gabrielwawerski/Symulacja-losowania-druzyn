@@ -6,11 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import sample.classes.draw.Draw;
 import sample.classes.team.Team;
 
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class SceneController implements Initializable {
@@ -34,7 +33,7 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupG;
     @FXML private ListView<String> groupH;
 
-    private ArrayList<Team> teams;
+    private HashMap<String, Team> teams;
 
     // TODO check if it's okay to instantiate this way
     private ObservableList<String>[] observableListBasket = new ObservableList[4]; //names of teams in each basket
