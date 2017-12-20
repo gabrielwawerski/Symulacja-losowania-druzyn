@@ -50,6 +50,7 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initializeFields();
         setDefaultTeams();
     }
 
@@ -103,6 +104,10 @@ public class SceneController implements Initializable {
         cleanLists();
         setDisableDrawButtons(false);
         setButtonsStyle(BUTTON_ENABLED_STYLE, drawButton, quickDrawButton);
+    }
+
+    private void initializeFields() {
+        teams = new HashMap<>();
     }
 
     private void setDefaultTeams() {
