@@ -91,19 +91,6 @@ public class SceneController implements Initializable {
         teams = new HashMap<>();
     }
 
-    Ordering<Map.Entry<String, Team>> byMapValues = new Ordering<Map.Entry<String, Team>>() {
-        @Override
-        public int compare(Map.Entry<String, Team> left, Map.Entry<String, Team> right) {
-            return left.getValue().compareTo(right.getValue());
-        }
-    };
-
-    public void sortTeamsMapByValuesDescending() {
-        // create a list of map entries
-        List<Map.Entry<String, Team>> _teams = Lists.newArrayList(teams.entrySet());
-        Collections.sort(_teams, byMapValues.reverse());
-    }
-
     private void setHost(Team team) {
         host = team;
         teams.put(team.getName(), team);
@@ -216,5 +203,18 @@ public class SceneController implements Initializable {
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
             observableListGroup[i].clear();
         }
+    }
+
+    Ordering<Map.Entry<String, Team>> byMapValues = new Ordering<Map.Entry<String, Team>>() {
+        @Override
+        public int compare(Map.Entry<String, Team> left, Map.Entry<String, Team> right) {
+            return left.getValue().compareTo(right.getValue());
+        }
+    };
+
+    public void sortTeamsMapByValuesDescending() {
+        // create a list of map entries
+        List<Map.Entry<String, Team>> _teams = Lists.newArrayList(teams.entrySet());
+        Collections.sort(_teams, byMapValues.reverse());
     }
 }

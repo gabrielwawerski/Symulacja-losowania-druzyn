@@ -45,12 +45,10 @@ public class Draw extends Service<Void> {
 
     @Override
     protected Task<Void> createTask() {
+        // lambda expression, which returns Task<Void> object and overrides call method
         return new Task<Void>() {
             @Override
             protected Void call() {
-
-                for (String x : baskets)
-
                 // 1. posortowanie druzyn malejaco ratingiem
                 // 2. wlozenie druzyn do koszykow
                 // 3. losowanie i zapelnianie grup
