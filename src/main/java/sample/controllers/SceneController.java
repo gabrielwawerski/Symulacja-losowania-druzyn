@@ -10,6 +10,7 @@ import sample.classes.team.Team;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class SceneController implements Initializable {
@@ -33,7 +34,7 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupG;
     @FXML private ListView<String> groupH;
 
-    private HashMap<String, Team> teams;
+    private Map<String, Team> teams;
 
     // TODO check if it's okay to instantiate this way
     private ObservableList<String>[] observableListBasket = new ObservableList[4]; //names of teams in each basket
