@@ -7,10 +7,13 @@ public class Team {
     private int rating;
     private Continent continent;
 
+    private static int instanceCount = 0;
+
     public Team(String name, int rating, Continent continent) {
         this.name = name;
         this.rating = rating;
         this.continent = continent;
+        instanceCount++;
     }
 
     public String getName() {
@@ -35,5 +38,9 @@ public class Team {
 
     public void setContinent(Continent continent) {
         this.continent = continent;
+    }
+
+    public static int getInstanceCount() {
+        return instanceCount;
     }
 }
