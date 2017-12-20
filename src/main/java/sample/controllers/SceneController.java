@@ -31,7 +31,6 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupG;
     @FXML private ListView<String> groupH;
 
-    // FIXME bad instantiation
     private ObservableList<String>[] namesOfTeamsInBasket = new ObservableList[4]; //names of teams in each basket
     private ObservableList<String>[] namesOfTeamsInGroup = new ObservableList[8]; //Array with names of teams in each
     // group
