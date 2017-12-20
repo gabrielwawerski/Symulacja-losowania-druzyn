@@ -209,7 +209,7 @@ public class SceneController implements Initializable {
     Ordering<Map.Entry<String, Team>> byMapValues = new Ordering<Map.Entry<String, Team>>() {
         @Override
         public int compare(Map.Entry<String, Team> left, Map.Entry<String, Team> right) {
-            return left.getValue().compareTo(right.getValue());
+            return left.getValue().compareTo(right.getValue()); // TODO check if it's working
         }
     };
 
