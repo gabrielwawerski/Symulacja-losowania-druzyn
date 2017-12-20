@@ -35,6 +35,7 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupH;
 
     private Map<String, Team> teams;
+    private Team host;
 
     // TODO check if it's okay to instantiate this way
     private ObservableList<String>[] observableListBasket = new ObservableList[4]; //names of teams in each basket
@@ -109,6 +110,16 @@ public class SceneController implements Initializable {
 
     private void initializeFields() {
         teams = new HashMap<>();
+    }
+
+    private void setHost(Team team) {
+        host = team;
+        // put at the beginning of the list - download guava library and use
+        // https://stackoverflow.com/questions/109383/sort-a-mapkey-value-by-values-java/3420912#3420912
+    }
+
+    private Team getHost() {
+        return host;
     }
 
     private void setDefaultTeams() {
