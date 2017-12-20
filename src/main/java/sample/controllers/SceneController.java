@@ -90,8 +90,8 @@ public class SceneController implements Initializable {
             }
             System.out.println();
         }
-        setUnableStyleAndOnAction(quickDrawButton);
-        setUnableStyleAndOnAction(drawButton);
+        setDisabledStyleAndOnAction(quickDrawButton);
+        setDisabledStyleAndOnAction(drawButton);
     }
 
     @FXML
@@ -141,9 +141,20 @@ public class SceneController implements Initializable {
         basket4.setItems(teamNamesInBasket[3]);
     }
 
-    private void setUnableStyleAndOnAction(Button button) {
+    private void setDisabledStyleAndOnAction(Button button) {
         button.setOnAction(null);
         quickDrawButton.setStyle(BUTTON_DISABLED_STYLE);
+    }
+
+    /**
+     * Sets the button style to one chosen by caller. Available styles:
+     * <br>{@linkplain SceneController#BUTTON_ENABLED_STYLE}
+     * <br>{@linkplain SceneController#BUTTON_DISABLED_STYLE}
+     * @param button the button that will have it's style set
+     * @param STYLE the style to set the button to
+     */
+    private void setButtonStyle(Button button, String STYLE) {
+        quickDrawButton.setStyle(STYLE);
     }
 
     private void cleanLists() {
