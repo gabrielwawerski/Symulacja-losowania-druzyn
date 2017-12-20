@@ -30,11 +30,12 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupG;
     @FXML private ListView<String> groupH;
 
+    // TODO check if it's okay to instantiate this way
     private ObservableList<String>[] teamsInBasket = new ObservableList[4]; //names of teams in each basket
     private ObservableList<String>[] teamsInGroup = new ObservableList[8]; //Array with names of teams in each
     // group
 
-    //should be more universal
+    // TODO should be more universal
     private static final int NUMBER_OF_BASKETS = 4; // the amount of baskets
     private static final int TEAMS_IN_BASKET = 8; // the amount of teams in a single basket
 
