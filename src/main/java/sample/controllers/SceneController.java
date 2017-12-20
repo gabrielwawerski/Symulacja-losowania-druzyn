@@ -36,8 +36,8 @@ public class SceneController implements Initializable {
     // group
 
     //should be more universal
-    private static final int TEAMS_IN_BASKET = 8;
-    private static final int NUMBER_OF_BASKETS = 4;
+    private static final int NUMBER_OF_BASKETS = 4; // the amount of baskets
+    private static final int TEAMS_IN_BASKET = 8; // the amount of teams in a single basket
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
