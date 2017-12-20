@@ -95,7 +95,8 @@ public class SceneController implements Initializable {
         String nameDrawn;
 
         // binding ObservableList with names of teams and ListView
-         groupA.setItems(namesTeamsInGroup[0]);
+
+        groupA.setItems(namesTeamsInGroup[0]);
         groupB.setItems(namesTeamsInGroup[1]);
         groupC.setItems(namesTeamsInGroup[2]);
         groupD.setItems(namesTeamsInGroup[3]);
@@ -104,6 +105,7 @@ public class SceneController implements Initializable {
         groupG.setItems(namesTeamsInGroup[6]);
         groupH.setItems(namesTeamsInGroup[7]);
 
+        // next team in basket
 
 
         for (int i = 0; i < numberOfBaskets; i++)
@@ -113,12 +115,15 @@ public class SceneController implements Initializable {
             {
                 rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[i]));
                 nameDrawn = namesTeamsInBasket[i].get(rand);
+                System.out.print(nameDrawn + " ");
+                Thread.sleep(500);
                 namesTeamsInGroup[j].add(i, nameDrawn);
                 namesTeamsInBasket[i].remove(rand);
                 numberOfTeamsInBasket[i]--;
 
             }
 
+            System.out.println();
 
         }
 
