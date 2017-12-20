@@ -151,6 +151,19 @@ public class SceneController implements Initializable {
     }
 
     /**
+     * Sets the style of buttons array. Available styles:
+     * <br>{@link SceneController#BUTTON_ENABLED_STYLE}
+     * <br>{@link SceneController#BUTTON_DISABLED_STYLE}
+     * @param STYLE the style to apply to all buttons
+     * @param buttons buttons to apply the style to
+     */
+    private void setButtonsStyle(String STYLE, Button... buttons) {
+        for (Button x : buttons) {
+            x.setStyle(STYLE);
+        }
+    }
+
+    /**
      * Sets the {@link SceneController#drawButton} and {@link SceneController#quickDrawButton}
      * to the desired state.
      * @param state the state to set the buttons
