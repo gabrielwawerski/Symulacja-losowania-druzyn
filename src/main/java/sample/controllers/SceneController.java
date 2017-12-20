@@ -42,8 +42,8 @@ public class SceneController implements Initializable {
     // group
 
     // TODO should be more universal
-    private static final int NUMBER_OF_BASKETS = 4; // the amount of baskets
-    private static final int TEAMS_IN_BASKET = 8; // the amount of teams in a single basket
+    public static final int NUMBER_OF_BASKETS = 4; // the amount of baskets
+    public static final int TEAMS_IN_BASKET = 8; // the amount of teams in a single basket
 
     // styles for different button states
     private static final String BUTTON_DISABLED_STYLE = "-fx-base: #444444; -fx-text-fill: #333333;";
