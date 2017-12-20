@@ -31,8 +31,8 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupH;
 
     // TODO check if it's okay to instantiate this way
-    private ObservableList<String>[] teamsInBasket = new ObservableList[4]; //names of teams in each basket
-    private ObservableList<String>[] teamsInGroup = new ObservableList[8]; //Array with names of teams in each
+    private ObservableList<String>[] teamNamesInBasket = new ObservableList[4]; //names of teams in each basket
+    private ObservableList<String>[] teamNamesInGroup = new ObservableList[8]; //Array with names of teams in each
     // group
 
     // TODO should be more universal
@@ -59,28 +59,28 @@ public class SceneController implements Initializable {
         }
 
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
-            teamsInGroup[i] = FXCollections.observableArrayList();
+            teamNamesInGroup[i] = FXCollections.observableArrayList();
         }
 
         // binding ObservableList with names of teams and ListView
-        groupA.setItems(teamsInGroup[0]);
-        groupB.setItems(teamsInGroup[1]);
-        groupC.setItems(teamsInGroup[2]);
-        groupD.setItems(teamsInGroup[3]);
-        groupE.setItems(teamsInGroup[4]);
-        groupF.setItems(teamsInGroup[5]);
-        groupG.setItems(teamsInGroup[6]);
-        groupH.setItems(teamsInGroup[7]);
+        groupA.setItems(teamNamesInGroup[0]);
+        groupB.setItems(teamNamesInGroup[1]);
+        groupC.setItems(teamNamesInGroup[2]);
+        groupD.setItems(teamNamesInGroup[3]);
+        groupE.setItems(teamNamesInGroup[4]);
+        groupF.setItems(teamNamesInGroup[5]);
+        groupG.setItems(teamNamesInGroup[6]);
+        groupH.setItems(teamNamesInGroup[7]);
 
         // next team in basket
         for (int i = 0; i < NUMBER_OF_BASKETS; i++) {
             for (int j = 0; j < TEAMS_IN_BASKET; j++) {
                 rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[i]));
-                nameDrawn = teamsInBasket[i].get(rand);
+                nameDrawn = teamNamesInBasket[i].get(rand);
                 System.out.print(nameDrawn + " ");
                 Thread.sleep(500);
-                teamsInGroup[j].add(i, nameDrawn);
-                teamsInBasket[i].remove(rand);
+                teamNamesInGroup[j].add(i, nameDrawn);
+                teamNamesInBasket[i].remove(rand);
                 numberOfTeamsInBasket[i]--;
             }
             System.out.println();
@@ -107,33 +107,33 @@ public class SceneController implements Initializable {
     }
 
     private void setDefaultTeams() {
-        teamsInBasket[0]
+        teamNamesInBasket[0]
                 = FXCollections.observableArrayList("Rosja", "Niemcy",
                 "Brazylia", "Portugalia",
                 "Argentyna", "Belgia",
                 "Polska", "Francja");
-        basket1.setItems(teamsInBasket[0]);
+        basket1.setItems(teamNamesInBasket[0]);
 
-        teamsInBasket[1]
+        teamNamesInBasket[1]
                 = FXCollections.observableArrayList("Hiszpania", "Peru",
                 "Szwajcaria", "Anglia",
                 "Kolumbia", "Meksyk",
                 "Urugwaj", "Chorwacja");
-        basket2.setItems(teamsInBasket[1]);
+        basket2.setItems(teamNamesInBasket[1]);
 
-        teamsInBasket[2]
+        teamNamesInBasket[2]
                 = FXCollections.observableArrayList("Dania", "Islandia",
                 "Kostaryka", "Szwecja",
                 "Tunezja", "Egipt",
                 "Senegal", "Iran");
-        basket3.setItems(teamsInBasket[2]);
+        basket3.setItems(teamNamesInBasket[2]);
 
-        teamsInBasket[3]
+        teamNamesInBasket[3]
                 = FXCollections.observableArrayList("Serbia", "Nigeria",
                 "Australia", "Japonia",
                 "Maroko", "Panama",
                 "Korea Południowa", "Arabia Saudyjska");
-        basket4.setItems(teamsInBasket[3]);
+        basket4.setItems(teamNamesInBasket[3]);
     }
 
     private void setUnableStyleAndOnAction(Button button) {
@@ -143,7 +143,7 @@ public class SceneController implements Initializable {
 
     private void cleanLists() {
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
-            teamsInGroup[i].clear();
+            teamNamesInGroup[i].clear();
         }
     }
 }
