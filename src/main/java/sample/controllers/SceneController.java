@@ -1,5 +1,7 @@
 package sample.controllers;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,9 +11,7 @@ import javafx.scene.control.ListView;
 import sample.classes.team.Team;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class SceneController implements Initializable {
     // TODO? put baskets and groups into an array, for later letting the user to choose
@@ -112,8 +112,23 @@ public class SceneController implements Initializable {
         teams = new HashMap<>();
     }
 
+    Ordering<Map.Entry<String, Team>> byMapValues = new Ordering<Map.Entry<String, Team>>() {
+        @Override
+        public int compare(Map.Entry<String, Team> left, Map.Entry<String, Team> right) {
+            return left.getValue().compareTo(right.getValue());
+        }
+    };
+
+    public void sortTeamsMapByValuesDescending() {
+        // create a list of map entries
+        List<Map.Entry<String, Team>> _teams = Lists.newArrayList(teams.entrySet());
+        Collections.sort(_teams, byMapValues.reverse());
+    }
+
     private void setHost(Team team) {
         host = team;
+        teams.put(team.getName(), team);
+
         // put at the beginning of the list - download guava library and use
         // https://stackoverflow.com/questions/109383/sort-a-mapkey-value-by-values-java/3420912#3420912
     }

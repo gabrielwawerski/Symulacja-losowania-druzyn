@@ -43,26 +43,11 @@ public class Draw extends Service<Void> {
         teams = _teams;
     }
 
-    Ordering<Map.Entry<String, Team>> byMapValues = new Ordering<Map.Entry<String, Team>>() {
-        @Override
-        public int compare(Map.Entry<String, Team> left, Map.Entry<String, Team> right) {
-            return left.getValue().compareTo(right.getValue());
-        }
-    };
-
-    public void sortTeamsMapByValuesDescending() {
-        // create a list of map entries
-        List<Map.Entry<String, Team>> _teams = Lists.newArrayList(teams.entrySet());
-        Collections.sort(_teams, byMapValues.reverse());
-    }
-
     @Override
     protected Task<Void> createTask() {
         return new Task<Void>() {
             @Override
             protected Void call() {
-                Collections.sort(teams);
-                Collections.reverse(teams);
 
                 for (String x : baskets)
 
