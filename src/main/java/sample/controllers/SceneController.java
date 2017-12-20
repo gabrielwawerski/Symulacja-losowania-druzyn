@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SceneController implements Initializable {
+
     @FXML private ListView<String> basket1;
     @FXML private ListView<String> basket2;
     @FXML private ListView<String> basket3;
@@ -75,7 +76,7 @@ public class SceneController implements Initializable {
 
 
     @FXML
-    protected void handleQuickDrawButton()
+    protected void handleQuickDrawButton() throws InterruptedException
     {
 
         int [] numberOfTeamsInBasket = new int [4];
@@ -94,6 +95,7 @@ public class SceneController implements Initializable {
         String nameDrawn;
 
         // binding ObservableList with names of teams and ListView
+
         groupA.setItems(namesTeamsInGroup[0]);
         groupB.setItems(namesTeamsInGroup[1]);
         groupC.setItems(namesTeamsInGroup[2]);
@@ -104,25 +106,36 @@ public class SceneController implements Initializable {
         groupH.setItems(namesTeamsInGroup[7]);
 
         // next team in basket
-        for (int i = 0; i < teamsInBasket; i++)
+
+
+        for (int i = 0; i < numberOfBaskets; i++)
         {
-            //next basket
-            for (int j = 0; j < numberOfBaskets; j++)
+
+            for (int j = 0; j < teamsInBasket; j++)
             {
-                rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[j]));
-                nameDrawn = namesTeamsInBasket[j].get(rand);
-                namesTeamsInGroup[i].add(j, nameDrawn);
-                namesTeamsInBasket[j].remove(rand);
-                numberOfTeamsInBasket[j]--;
+                rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[i]));
+                nameDrawn = namesTeamsInBasket[i].get(rand);
+                System.out.print(nameDrawn + " ");
+                Thread.sleep(500);
+                namesTeamsInGroup[j].add(i, nameDrawn);
+                namesTeamsInBasket[i].remove(rand);
+                numberOfTeamsInBasket[i]--;
 
             }
 
-            quickDrawButton.setOnAction(null);
-            quickDrawButton.setStyle("-fx-base: #444444; -fx-text-fill: #333333;");
+            System.out.println();
+
         }
 
+        setUnableStyleAndOnAction(quickDrawButton);
+        setUnableStyleAndOnAction(drawButton);
 
+    }
 
+    private void setUnableStyleAndOnAction(Button button)
+    {
+        button.setOnAction(null);
+        quickDrawButton.setStyle("-fx-base: #444444; -fx-text-fill: #333333;");
     }
 
 
@@ -133,12 +146,20 @@ public class SceneController implements Initializable {
         cleanLists();
         quickDrawButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                handleQuickDrawButton();
+                try
+                {
+                    handleQuickDrawButton();
+                } catch (InterruptedException e1)
+                {
+                    e1.printStackTrace();
+                }
             }
         });
 
         quickDrawButton.setStyle("-fx-base: #000000; -fx-text-fill: #FFFFFF;");
+        drawButton.setStyle("-fx-base: #000000; -fx-text-fill: #FFFFFF;");
     }
+
 
     private void cleanLists()
     {
