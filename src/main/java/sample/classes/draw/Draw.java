@@ -30,6 +30,10 @@ public class Draw extends Service<Void> {
         return instance;
     }
 
+    public void startDraw() {
+        createTask();
+    }
+
     /**
      * Injects fields sent from {@link SceneController} class.
      * @param _baskets {@link SceneController#observableListBasket}
