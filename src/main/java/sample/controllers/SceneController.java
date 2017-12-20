@@ -134,6 +134,11 @@ public class SceneController implements Initializable {
         basket4.setItems(teamNamesInBasket[3]);
     }
 
+    /**
+     * @see #setButtonStyle(Button, String)
+     * @see #setButtonsStyle(String, Button...)
+     */
+    @Deprecated
     private void setDisabledStyleAndOnAction(Button button) {
         button.setOnAction(null);
         quickDrawButton.setStyle(BUTTON_DISABLED_STYLE);
