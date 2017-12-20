@@ -34,6 +34,8 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupG;
     @FXML private ListView<String> groupH;
 
+    private ArrayList<Team> teams;
+
     // TODO check if it's okay to instantiate this way
     private ObservableList<String>[] observableListBasket = new ObservableList[4]; //names of teams in each basket
     private ObservableList<String>[] observableListGroup = new ObservableList[8]; //Array with names of teams in each
@@ -178,6 +180,11 @@ public class SceneController implements Initializable {
         quickDrawButton.setDisable(state);
     }
 
+    /**
+     * Instantiaties and initializes all teams
+     */
+    private void makeTeams() {
+    }
 
     private void cleanLists() {
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
