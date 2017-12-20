@@ -2,7 +2,7 @@ package sample.classes.team;
 
 import javafx.scene.image.Image;
 
-public class Team {
+public class Team implements Comparable<Team> {
     private String name;
     private int rating;
     private Continent continent;
@@ -42,5 +42,10 @@ public class Team {
 
     public static int getInstanceCount() {
         return instanceCount;
+    }
+
+    @Override
+    public int compareTo(Team other) {
+        return Integer.compare(this.rating, other.rating);
     }
 }
