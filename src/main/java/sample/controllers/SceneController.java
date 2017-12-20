@@ -13,7 +13,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SceneController implements Initializable {
-
     @FXML private ListView<String> basket1;
     @FXML private ListView<String> basket2;
     @FXML private ListView<String> basket3;
@@ -33,126 +32,106 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupH;
 
 
-    private ObservableList<String>[] namesTeamsInBasket = new ObservableList[4]; //names of teams in each basket
-    private ObservableList<String>[] namesTeamsInGroup = new ObservableList[8]; //Array with names of teams in each
+    private ObservableList<String>[] namesOfTeamsInBasket = new ObservableList[4]; //names of teams in each basket
+    private ObservableList<String>[] namesOfTeamsInGroup = new ObservableList[8]; //Array with names of teams in each
     // group
 
     //should be more universal
-    private final int teamsInBasket = 8;
-    private final int numberOfBaskets = 4;
+    private static final int TEAMS_IN_BASKET = 8;
+    private static final int NUMBER_OF_BASKETS = 4;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         setDefaultTeams();
-
     }
 
-    private void setDefaultTeams()
-    {
+    private void setDefaultTeams() {
+        namesOfTeamsInBasket[0]
+                = FXCollections.observableArrayList("Rosja", "Niemcy",
+                "Brazylia", "Portugalia",
+                "Argentyna", "Belgia",
+                "Polska", "Francja");
+        basket1.setItems(namesOfTeamsInBasket[0]);
 
-        namesTeamsInBasket[0] = FXCollections.observableArrayList("Rosja", "Niemcy", "Brazylia",
-                "Portugalia", "Argentyna", "Belgia", "Polska", "Francja");
-        basket1.setItems(namesTeamsInBasket[0]);
+        namesOfTeamsInBasket[1]
+                = FXCollections.observableArrayList("Hiszpania", "Peru",
+                "Szwajcaria", "Anglia",
+                "Kolumbia", "Meksyk",
+                "Urugwaj", "Chorwacja");
+        basket2.setItems(namesOfTeamsInBasket[1]);
 
-        namesTeamsInBasket[1] = FXCollections.observableArrayList("Hiszpania", "Peru", "Szwajcaria",
-                "Anglia", "Kolumbia", "Meksyk", "Urugwaj", "Chorwacja");
-        basket2.setItems(namesTeamsInBasket[1]);
+        namesOfTeamsInBasket[2]
+                = FXCollections.observableArrayList("Dania", "Islandia",
+                "Kostaryka", "Szwecja",
+                "Tunezja", "Egipt",
+                "Senegal", "Iran");
+        basket3.setItems(namesOfTeamsInBasket[2]);
 
-        namesTeamsInBasket[2] = FXCollections.observableArrayList("Dania", "Islandia", "Kostaryka",
-                "Szwecja", "Tunezja", "Egipt", "Senegal", "Iran");
-        basket3.setItems(namesTeamsInBasket[2]);
-
-        namesTeamsInBasket[3] = FXCollections.observableArrayList("Serbia", "Nigeria", "Australia",
-                "Japonia", "Maroko", "Panama", "Korea Południowa", "Arabia Saudyjska");
-        basket4.setItems(namesTeamsInBasket[3]);
+        namesOfTeamsInBasket[3]
+                = FXCollections.observableArrayList("Serbia", "Nigeria",
+                "Australia", "Japonia",
+                "Maroko", "Panama",
+                "Korea Południowa", "Arabia Saudyjska");
+        basket4.setItems(namesOfTeamsInBasket[3]);
     }
-
 
     @FXML
     protected void handleDrawButton() {
     }
 
-
-
     @FXML
-    protected void handleQuickDrawButton() throws InterruptedException
-    {
-
-        int [] numberOfTeamsInBasket = new int [4];
-
-        for (int i = 0; i < numberOfBaskets ; i++)
-        {
-            numberOfTeamsInBasket[i] = teamsInBasket;
-        }
-
-        for (int i = 0; i < teamsInBasket; i++)
-        {
-            namesTeamsInGroup[i] = FXCollections.observableArrayList();
-        }
-
+    protected void handleQuickDrawButton() throws InterruptedException {
+        int[] numberOfTeamsInBasket = new int[4];
         int rand;
         String nameDrawn;
 
-        // binding ObservableList with names of teams and ListView
+        for (int i = 0; i < NUMBER_OF_BASKETS; i++)
+            numberOfTeamsInBasket[i] = TEAMS_IN_BASKET;
 
-        groupA.setItems(namesTeamsInGroup[0]);
-        groupB.setItems(namesTeamsInGroup[1]);
-        groupC.setItems(namesTeamsInGroup[2]);
-        groupD.setItems(namesTeamsInGroup[3]);
-        groupE.setItems(namesTeamsInGroup[4]);
-        groupF.setItems(namesTeamsInGroup[5]);
-        groupG.setItems(namesTeamsInGroup[6]);
-        groupH.setItems(namesTeamsInGroup[7]);
+        for (int i = 0; i < TEAMS_IN_BASKET; i++)
+            namesOfTeamsInGroup[i] = FXCollections.observableArrayList();
+
+        // binding ObservableList with names of teams and ListView
+        groupA.setItems(namesOfTeamsInGroup[0]);
+        groupB.setItems(namesOfTeamsInGroup[1]);
+        groupC.setItems(namesOfTeamsInGroup[2]);
+        groupD.setItems(namesOfTeamsInGroup[3]);
+        groupE.setItems(namesOfTeamsInGroup[4]);
+        groupF.setItems(namesOfTeamsInGroup[5]);
+        groupG.setItems(namesOfTeamsInGroup[6]);
+        groupH.setItems(namesOfTeamsInGroup[7]);
 
         // next team in basket
-
-
-        for (int i = 0; i < numberOfBaskets; i++)
-        {
-
-            for (int j = 0; j < teamsInBasket; j++)
-            {
+        for (int i = 0; i < NUMBER_OF_BASKETS; i++) {
+            for (int j = 0; j < TEAMS_IN_BASKET; j++) {
                 rand = (int)(Math.floor(Math.random() * numberOfTeamsInBasket[i]));
-                nameDrawn = namesTeamsInBasket[i].get(rand);
+                nameDrawn = namesOfTeamsInBasket[i].get(rand);
                 System.out.print(nameDrawn + " ");
                 Thread.sleep(500);
-                namesTeamsInGroup[j].add(i, nameDrawn);
-                namesTeamsInBasket[i].remove(rand);
+                namesOfTeamsInGroup[j].add(i, nameDrawn);
+                namesOfTeamsInBasket[i].remove(rand);
                 numberOfTeamsInBasket[i]--;
-
             }
-
             System.out.println();
-
         }
-
         setUnableStyleAndOnAction(quickDrawButton);
         setUnableStyleAndOnAction(drawButton);
-
     }
 
-    private void setUnableStyleAndOnAction(Button button)
-    {
+    private void setUnableStyleAndOnAction(Button button) {
         button.setOnAction(null);
         quickDrawButton.setStyle("-fx-base: #444444; -fx-text-fill: #333333;");
     }
 
-
     @FXML
     protected void handleResetButton() {
-
         setDefaultTeams();
         cleanLists();
+
         quickDrawButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                try
-                {
-                    handleQuickDrawButton();
-                } catch (InterruptedException e1)
-                {
-                    e1.printStackTrace();
-                }
+                try { handleQuickDrawButton(); }
+                catch (InterruptedException e1) { e1.printStackTrace(); }
             }
         });
 
@@ -160,12 +139,8 @@ public class SceneController implements Initializable {
         drawButton.setStyle("-fx-base: #000000; -fx-text-fill: #FFFFFF;");
     }
 
-
-    private void cleanLists()
-    {
-        for (int i = 0; i < teamsInBasket ; i++)
-        {
-            namesTeamsInGroup[i].clear();
-        }
+    private void cleanLists() {
+        for (int i = 0; i < TEAMS_IN_BASKET; i++)
+            namesOfTeamsInGroup[i].clear();
     }
 }
