@@ -90,23 +90,16 @@ public class SceneController implements Initializable {
             }
             System.out.println();
         }
-        setDisabledStyleAndOnAction(quickDrawButton);
-        setDisabledStyleAndOnAction(drawButton);
+        setDisableDrawButtons(true);
+        setButtonStyle(drawButton, BUTTON_DISABLED_STYLE);
+        setButtonStyle(quickDrawButton, BUTTON_DISABLED_STYLE);
     }
 
     @FXML
     protected void handleResetButton() {
         setDefaultTeams();
         cleanLists();
-
-        quickDrawButton.setOnAction((ActionEvent e) -> {
-                try {
-                    handleQuickDrawButton();
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
-        });
-
+        setDisableDrawButtons(false);
         quickDrawButton.setStyle(BUTTON_ENABLED_STYLE);
         drawButton.setStyle(BUTTON_ENABLED_STYLE);
     }
@@ -148,14 +141,25 @@ public class SceneController implements Initializable {
 
     /**
      * Sets the button style to one chosen by caller. Available styles:
-     * <br>{@linkplain SceneController#BUTTON_ENABLED_STYLE}
-     * <br>{@linkplain SceneController#BUTTON_DISABLED_STYLE}
+     * <br>{@link SceneController#BUTTON_ENABLED_STYLE}
+     * <br>{@link SceneController#BUTTON_DISABLED_STYLE}
      * @param button the button that will have it's style set
      * @param STYLE the style to set the button to
      */
     private void setButtonStyle(Button button, String STYLE) {
         quickDrawButton.setStyle(STYLE);
     }
+
+    /**
+     * Sets the {@link SceneController#drawButton} and {@link SceneController#quickDrawButton}
+     * to the desired state.
+     * @param state the state to set the buttons
+     */
+    private void setDisableDrawButtons(boolean state) {
+        drawButton.setDisable(state);
+        quickDrawButton.setDisable(state);
+    }
+
 
     private void cleanLists() {
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
