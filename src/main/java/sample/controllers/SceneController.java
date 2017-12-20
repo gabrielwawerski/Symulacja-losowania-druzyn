@@ -38,9 +38,8 @@ public class SceneController implements Initializable {
     private Team host;
 
     // TODO check if it's okay to instantiate this way
-    private ObservableList<String>[] observableListBasket = new ObservableList[4]; //names of teams in each basket
-    private ObservableList<String>[] observableListGroup = new ObservableList[8]; //Array with names of teams in each
-    // group
+    private ObservableList<String>[] observableListBasket = new ObservableList[4]; // names of teams in each basket
+    private ObservableList<String>[] observableListGroup = new ObservableList[8]; // array with names of teams in each
 
     // TODO should be more universal
     public static final int NUMBER_OF_BASKETS = 4; // the amount of baskets
@@ -81,21 +80,6 @@ public class SceneController implements Initializable {
         groupG.setItems(observableListGroup[6]);
         groupH.setItems(observableListGroup[7]);
 
-        // next team in basket
-        for (int i = 0; i < NUMBER_OF_BASKETS; i++) {
-            for (int j = 0; j < TEAMS_IN_BASKET; j++) {
-                rand = (int)(Math.floor(Math.random() * nextTeam));
-                nameDrawn = observableListBasket[i].get(rand);
-                System.out.print(nameDrawn + " ");
-                Thread.sleep(100);
-                observableListGroup[j].add(i, nameDrawn);
-                observableListBasket[i].remove(rand);
-                nextTeam--;
-            }
-            nextTeam = 8;
-            System.out.println();
-        }
-
         setDisableDrawButtons(true);
         setButtonsStyle(BUTTON_DISABLED_STYLE, drawButton, quickDrawButton);
     }
@@ -128,9 +112,6 @@ public class SceneController implements Initializable {
     private void setHost(Team team) {
         host = team;
         teams.put(team.getName(), team);
-
-        // put at the beginning of the list - download guava library and use
-        // https://stackoverflow.com/questions/109383/sort-a-mapkey-value-by-values-java/3420912#3420912
     }
 
     private Team getHost() {
