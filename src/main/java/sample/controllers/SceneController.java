@@ -34,12 +34,11 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupG;
     @FXML private ListView<String> groupH;
 
-    private Map<String, Team> teams;
-    private Team host;
-
     // TODO check if it's okay to instantiate this way
     private ObservableList<String>[] observableListBasket = new ObservableList[4]; // names of teams in each basket
     private ObservableList<String>[] observableListGroup = new ObservableList[8]; // array with names of teams in each
+    private Map<String, Team> teams;
+    private Team host;
 
     // TODO should be more universal
     public static final int NUMBER_OF_BASKETS = 4; // the amount of baskets
@@ -48,6 +47,7 @@ public class SceneController implements Initializable {
     // styles for different button states
     private static final String BUTTON_DISABLED_STYLE = "-fx-base: #444444; -fx-text-fill: #333333;";
     private static final String BUTTON_ENABLED_STYLE = "-fx-base: #000000; -fx-text-fill: #FFFFFF;";
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,10 +61,6 @@ public class SceneController implements Initializable {
 
     @FXML
     protected void handleQuickDrawButton() throws InterruptedException {
-        int nextTeam = 8;
-        int rand;
-        String nameDrawn;
-
         disableAllDrawButtons(true);
 
         // instantiate all ObservableLists for team names in groups
@@ -111,6 +107,8 @@ public class SceneController implements Initializable {
     private void setHost(Team team) {
         host = team;
         teams.put(team.getName(), team);
+
+        sortTeamsMapByValuesDescending();
     }
 
     private Team getHost() {
