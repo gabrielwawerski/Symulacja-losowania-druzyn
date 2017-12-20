@@ -85,11 +85,13 @@ public class SceneController implements Initializable {
         int rand;
         String nameDrawn;
 
-        for (int i = 0; i < NUMBER_OF_BASKETS; i++)
+        for (int i = 0; i < NUMBER_OF_BASKETS; i++) {
             numberOfTeamsInBasket[i] = TEAMS_IN_BASKET;
+        }
 
-        for (int i = 0; i < TEAMS_IN_BASKET; i++)
+        for (int i = 0; i < TEAMS_IN_BASKET; i++) {
             namesOfTeamsInGroup[i] = FXCollections.observableArrayList();
+        }
 
         // binding ObservableList with names of teams and ListView
         groupA.setItems(namesOfTeamsInGroup[0]);
@@ -129,8 +131,11 @@ public class SceneController implements Initializable {
         cleanLists();
 
         quickDrawButton.setOnAction((ActionEvent e) -> {
-                try { handleQuickDrawButton(); }
-                catch (InterruptedException e1) { e1.printStackTrace(); }
+                try {
+                    handleQuickDrawButton();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
         });
 
         quickDrawButton.setStyle("-fx-base: #000000; -fx-text-fill: #FFFFFF;");
@@ -138,7 +143,8 @@ public class SceneController implements Initializable {
     }
 
     private void cleanLists() {
-        for (int i = 0; i < TEAMS_IN_BASKET; i++)
+        for (int i = 0; i < TEAMS_IN_BASKET; i++) {
             namesOfTeamsInGroup[i].clear();
+        }
     }
 }
