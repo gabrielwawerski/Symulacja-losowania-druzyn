@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import sample.classes.draw.Draw;
 import sample.classes.team.Team;
 
 import java.net.URL;
@@ -41,6 +42,8 @@ public class SceneController implements Initializable {
     private Map<String, Team> teams;
     private Team host;
 
+    private Draw draw;
+
     // TODO should be more universal
     public static final int NUMBER_OF_BASKETS = 4; // total amount of baskets for teams
     public static final int TEAMS_IN_BASKET = 8; // total amount of teams in a single basket
@@ -63,6 +66,8 @@ public class SceneController implements Initializable {
     @FXML
     protected void handleQuickDrawButton() throws InterruptedException {
         disableAllDrawButtons(true);
+
+        draw.start();
 
         // instantiate all ObservableLists for team names in groups
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
@@ -90,6 +95,7 @@ public class SceneController implements Initializable {
 
     private void initializeFields() {
         teams = new HashMap<>();
+        draw = Draw.getInstance();
     }
 
     private void setHost(Team team) {
