@@ -91,8 +91,7 @@ public class SceneController implements Initializable {
             System.out.println();
         }
         setDisableDrawButtons(true);
-        setButtonStyle(drawButton, BUTTON_DISABLED_STYLE);
-        setButtonStyle(quickDrawButton, BUTTON_DISABLED_STYLE);
+        setButtonsStyle(BUTTON_DISABLED_STYLE, drawButton, quickDrawButton);
     }
 
     @FXML
@@ -100,8 +99,7 @@ public class SceneController implements Initializable {
         setDefaultTeams();
         cleanLists();
         setDisableDrawButtons(false);
-        quickDrawButton.setStyle(BUTTON_ENABLED_STYLE);
-        drawButton.setStyle(BUTTON_ENABLED_STYLE);
+        setButtonsStyle(BUTTON_ENABLED_STYLE, drawButton, quickDrawButton);
     }
 
     private void setDefaultTeams() {
