@@ -128,11 +128,9 @@ public class SceneController implements Initializable {
         setDefaultTeams();
         cleanLists();
 
-        quickDrawButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
+        quickDrawButton.setOnAction((ActionEvent e) -> {
                 try { handleQuickDrawButton(); }
                 catch (InterruptedException e1) { e1.printStackTrace(); }
-            }
         });
 
         quickDrawButton.setStyle("-fx-base: #000000; -fx-text-fill: #FFFFFF;");
