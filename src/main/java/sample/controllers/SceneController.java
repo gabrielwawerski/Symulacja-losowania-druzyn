@@ -35,14 +35,15 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupH;
 
     // TODO check if it's okay to instantiate this way
-    private ObservableList<String>[] observableListBasket = new ObservableList[4]; // names of teams in each basket
+    // arrays for observable lists that bind to baskets and groups ListView's
+    private ObservableList<String>[] observableListBasket = new ObservableList[4];
     private ObservableList<String>[] observableListGroup = new ObservableList[8]; // array with names of teams in each
     private Map<String, Team> teams;
     private Team host;
 
     // TODO should be more universal
-    public static final int NUMBER_OF_BASKETS = 4; // the amount of baskets
-    public static final int TEAMS_IN_BASKET = 8; // the amount of teams in a single basket
+    public static final int NUMBER_OF_BASKETS = 4; // total amount of baskets for teams
+    public static final int TEAMS_IN_BASKET = 8; // total amount of teams in a single basket
 
     // styles for different button states
     private static final String BUTTON_DISABLED_STYLE = "-fx-base: #444444; -fx-text-fill: #333333;";
