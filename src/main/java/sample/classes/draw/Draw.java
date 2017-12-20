@@ -49,9 +49,7 @@ public class Draw extends Service<Void> {
         return new Task<Void>() {
             @Override
             protected Void call() {
-                // 1. posortowanie druzyn malejaco ratingiem
-                // 2. wlozenie druzyn do koszykow
-                // 3. losowanie i zapelnianie grup
+                // losowanie i zapelnianie grup (glowna petla for)
                 return null;
             }
         };
