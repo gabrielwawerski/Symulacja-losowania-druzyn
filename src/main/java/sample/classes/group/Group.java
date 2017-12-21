@@ -6,8 +6,10 @@ import sample.classes.team.Team;
 public class Group {
     private TeamBundle[] teamBundle;
     private int teamCount = 0;
+    private int europeTeamCounter = 0;
 
     private static final int MAX_TEAM_SIZE = 4;
+    private static final int MAX_EUROPE_TEAMS = 2;
 
     public Group() {
         teamBundle[0] = new TeamBundle();

@@ -70,8 +70,6 @@ public class SceneController implements Initializable {
     protected void handleQuickDrawButton() throws InterruptedException {
         disableAllDrawButtons(true);
 
-        draw.start();
-
         // instantiate all ObservableLists for team names in groups
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
             observableListGroup[i] = FXCollections.observableArrayList();
@@ -86,6 +84,8 @@ public class SceneController implements Initializable {
         groupF.setItems(observableListGroup[5]);
         groupG.setItems(observableListGroup[6]);
         groupH.setItems(observableListGroup[7]);
+
+        draw.start();
     }
 
     @FXML
