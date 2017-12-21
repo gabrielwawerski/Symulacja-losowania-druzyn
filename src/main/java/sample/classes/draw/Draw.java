@@ -9,26 +9,17 @@ import sample.classes.team.Team;
 import sample.controllers.SceneController;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 // TODO receive ObservableLists to baskets and groups, draw teams and put them in baskets, ?then return?
 /**
  * Main class for drawing logic and more.
- * <br>Remember to first get the instance of a class before using it, using
- * {@link Draw#getInstance} method.
  */
 public class Draw extends Service<Void> {
-    public static ObservableList<String>[] baskets;
-    public static ObservableList<String>[] groups;
-    public static HashMap<String, Team> teams;
-    public static Draw instance = null;
+    private ObservableList<String>[] baskets;
+    private ObservableList<String>[] groups;
+    private HashMap<String, Team> teams;
+    private AtomicInteger i = new AtomicInteger(0);
 
-    private Draw() {
-    }
-
-    public static Draw getInstance() {
-        if (instance == null)
-            instance = new Draw();
-        return instance;
-    }
 
     public void startDraw() {
         createTask();
@@ -36,15 +27,15 @@ public class Draw extends Service<Void> {
 
     /**
      * Injects fields sent from {@link SceneController} class.
-     * @param _baskets {@link SceneController#observableListBasket}
-     * @param _groups {@link SceneController#observableListGroup}
-     * @param _teams {@link SceneController#teams}
+     * @param baskets {@link SceneController#observableListBasket}
+     * @param groups {@link SceneController#observableListGroup}
+     * @param teams {@link SceneController#teams}
      */
-    public static void injectFields(ObservableList<String>[] _baskets, ObservableList<String>[] _groups,
-                                    HashMap<String, Team> _teams) {
-        baskets = _baskets;
-        groups = _groups;
-        teams = _teams;
+    public void injectFields(ObservableList<String>[] baskets, ObservableList<String>[] groups,
+                                    HashMap<String, Team> teams) {
+        this.baskets = baskets;
+        this.groups = groups;
+        this.teams = teams;
     }
 
     @Override
