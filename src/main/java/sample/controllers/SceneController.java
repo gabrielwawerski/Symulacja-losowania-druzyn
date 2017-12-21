@@ -57,6 +57,7 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("HWDP");
         initializeFields();
         setDefaultTeams();
     }
