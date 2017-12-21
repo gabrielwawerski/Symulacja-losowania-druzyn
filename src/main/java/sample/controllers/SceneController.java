@@ -97,7 +97,7 @@ public class SceneController implements Initializable {
 
     private void initializeFields() {
         teams = new HashMap<>();
-        draw = Draw.getInstance();
+        draw = new Draw();
     }
 
     private void setHost(Team team) {
