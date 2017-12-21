@@ -76,3 +76,7 @@ hs_err_pid*
 /Symulacja losowania druzyn.iml
 .idea/artifacts/
 target/
+/.idea/
+.idea/preferred-vcs.xml
+.idea/shelf/
+lib/
