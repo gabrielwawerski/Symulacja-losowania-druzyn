@@ -39,6 +39,8 @@ public class SceneController implements Initializable {
     // arrays for observable lists that bind to baskets and groups ListView's
     private ObservableList<String>[] observableListBasket = new ObservableList[4];
     private ObservableList<String>[] observableListGroup = new ObservableList[8];
+    // all teams sorted in ascending order - corresponding to their fifa rank + 1
+    // 1st place is always taken by the host
     private Map<String, Team> teams;
     private Team host;
 
