@@ -19,8 +19,8 @@
         <module name="Symulacja losowania druzyn" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Symulacja losowania druzyn" target="1.8" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="Symulacja losowania druzyn" target="" />
     </bytecodeTargetLevel>
   </component>
 </project>
