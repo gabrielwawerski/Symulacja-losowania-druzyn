@@ -1,6 +1,7 @@
 package sample.classes.basket;
 
 import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import sample.classes.team.Team;
 import sample.controllers.SceneController;
@@ -16,6 +17,7 @@ public class Basket {
 
     public Basket(ListView<String> listView) {
         this.listView = listView;
+        teams = new Team[SceneController.NUMBER_OF_BASKETS];
         index = 0;
     }
 
@@ -25,7 +27,7 @@ public class Basket {
         return teams[index];
     }
 
-    public void setTeam(Team team) {
+    public void putTeam(Team team) {
         if (index > teams.length)
             try {
                 throw new Exception("should this check be necessary?");
@@ -35,7 +37,7 @@ public class Basket {
         teams[index++] = team;
     }
 
-    public void setTeam(int index, Team team) {
+    public void putTeam(int index, Team team) {
         teams[index] = team;
     }
 

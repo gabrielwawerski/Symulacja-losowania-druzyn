@@ -37,12 +37,12 @@ public class FillBasketService extends Service<ObservableList<String>> {
                     System.out.println("Main loop iteration " + i);
                     for (int j = 0; j < SceneController.MAX_BASKET_CAPACITY; j++) {
                         System.out.println("Inner loop" + j + "iteration");
-                        baskets[i].setTeam(j, teams.get(i).get(j)); // TODO FIXME
+                        baskets[i].putTeam(j, teams.get(i).get(j)); // TODO FIXME
                     }
                     updateProgress(i, SceneController.NUMBER_OF_BASKETS);
                     updateValue(newObservableList());
                 }
-                return null;
+                return newObservableList();
             }
         };
     }

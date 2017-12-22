@@ -20,7 +20,7 @@ public class Main extends Application {
         primaryStage.setTitle("Wylosuj grupy na Mundial!");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
+//        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
