@@ -3,12 +3,9 @@ package sample.classes.threads;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import sample.classes.basket.Basket;
-import sample.classes.team.Team;
-import sample.classes.threads.tasks.FillBasketService;
+import sample.classes.threads.tasks.FillBasketTask;
 import sample.controllers.SceneController;
 
-import java.util.*;
 import java.util.concurrent.CountDownLatch;
 // TODO receive ObservableLists to baskets and groups, threads teams and put them in baskets, ?then return?
 /**
@@ -16,7 +13,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class Draw extends Service {
     CountDownLatch fillBasketsLatch = new CountDownLatch(SceneController.NUMBER_OF_BASKETS);
-    private FillBasketService fillBasketService;
+    private FillBasketTask fillBasketTask;
 
     public Draw() {
     }

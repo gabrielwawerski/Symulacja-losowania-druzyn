@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import sample.classes.basket.Basket;
 import sample.classes.threads.Draw;
-import sample.classes.threads.tasks.FillBasketService;
+import sample.classes.threads.tasks.FillBasketTask;
 import sample.classes.team.Continent;
 import sample.classes.team.Team;
 
@@ -62,9 +62,9 @@ public class SceneController implements Initializable {
 
     // TODO should be more universal
     public static final int NUMBER_OF_BASKETS = 4; // total amount of baskets for teams
-    public static final int TEAMS_IN_BASKET = 8; // total amount of teams in a single basket
+    public static final int MAX_BASKET_CAPACITY = 8; // total amount of teams in a single basket
     public static final int NUMBER_OF_GROUPS = 8;
-    public static final int TEAMS_IN_GROUP = 4;
+    public static final int MAX_GROUP_CAPACITY = 4;
 
     // the initial size of the team ArrayList (should be equal to the amount of pre added teams)
     private static final int INITIAL_TEAMS_AMOUNT = 32;
@@ -74,13 +74,15 @@ public class SceneController implements Initializable {
     private static final String BUTTON_ENABLED_STYLE = "-fx-base: #000000; -fx-text-fill: #FFFFFF;";
 
 
+    private int i = 0;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         baskets = new Basket[NUMBER_OF_BASKETS];
         basketsListViews = new ListView[NUMBER_OF_BASKETS];
         groupsListViews = new ListView[NUMBER_OF_GROUPS];
 
-        setDefaultTeams();
+//        setDefaultTeams();
         makeTeams();
         setHost(new Team("Russia", 65, Continent.EUROPE));
         putHost(getHost());
@@ -102,9 +104,13 @@ public class SceneController implements Initializable {
 
         // TODO delete this
         // instantiate all ObservableLists for team names in baskets
-        for (int i = 0; i < NUMBER_OF_BASKETS; i++) {
-            observableListBasket[i] = FXCollections.observableArrayList();
-        }
+//        for (int i = 0; i < NUMBER_OF_BASKETS; i++) {
+//            observableListBasket[i] = FXCollections.observableArrayList();
+//        }
+//
+//        for (int i = 0; i < NUMBER_OF_GROUPS; i++) {
+//            observableListGroup[i] = FXCollections.observableArrayList();
+//        }
 
         for (int i = 0; i < NUMBER_OF_GROUPS; i++) {
             observableListGroup[i] = FXCollections.observableArrayList();
@@ -112,33 +118,28 @@ public class SceneController implements Initializable {
 
 
         // neccessary because arrays don't support generics
-        List<Team>[] lists = (ArrayList<Team>[]) new ArrayList<?>[NUMBER_OF_BASKETS];
+//        List<Team>[] lists = (ArrayList<Team>[]) new ArrayList<?>[NUMBER_OF_BASKETS];
+        List<List<Team>> teams_ = new ArrayList<>();
 
-        lists[0] = teams.subList(0, 9);
+        teams_.get(0).get(0) = teams.subList(0, 9); // TODO FIGURE OUT HOW TO ADD teams to this god awful list and iterate over it in for few lines down
         lists[1] = teams.subList(8, 17);
         lists[2] = teams.subList(16, 25);
         lists[3] = teams.subList(24, 33);
 
-        FillBasketService fillBasketService = new FillBasketService(baskets, lists);
-        fillBasketService.setOnSucceeded(event -> {
-            observableListBasket = fillBasketService.getValue();
-        });
+        // TODO not quite correct - figure out how to do setOnSucceeded and generally where to initialize FillBasketTask - or maybe swap it to Service or some other thing...
+        // lookup how to make an object that encapsulates Task, which returns it's value and can be reseted
+        Team[] teams = new Team[MAX_BASKET_CAPACITY];
+        for ( ; i < NUMBER_OF_BASKETS; i++) {
+            teamsSubLists[i].toArray(teams);
+            FillBasketTask fillBasketTask = new FillBasketTask(baskets[i], teams);
+            fillBasketTask.setOnSucceeded(event
+                    -> observableListBasket[getI()] = fillBasketTask.getValue().getObservableList());
+        }
+    }
 
 
-        List listView; // List that will view the teams list
-        Team[] teamsArray = new Team[TEAMS_IN_BASKET]; // for toArray call and Basket object argument
-
-        listView.toArray(teamsArray);
-        baskets[0] = new Basket(teamsArray);
-
-        listView.toArray(teamsArray);
-        baskets[1] = new Basket(teamsArray);
-
-        listView.toArray(teamsArray);
-        baskets[2] = new Basket(teamsArray);
-
-        listView.toArray(teamsArray);
-        baskets[3] = new Basket(teamsArray);
+    private int getI() {
+        return i;
     }
 
     @FXML
@@ -279,11 +280,14 @@ public class SceneController implements Initializable {
      */
     private void makeTeams() {
         teams = new ArrayList<>(INITIAL_TEAMS_AMOUNT);
+        for (int i = 0; i < INITIAL_TEAMS_AMOUNT; i++) {
+            teams.add(new Team("asd", 50, Continent.EUROPE));
+        }
         // TODO code for all team instances
     }
 
     private void cleanLists() {
-        for (int i = 0; i < TEAMS_IN_BASKET; i++) {
+        for (int i = 0; i < MAX_BASKET_CAPACITY; i++) {
             observableListGroup[i].clear();
         }
     }
