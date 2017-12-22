@@ -50,6 +50,9 @@ public class SceneController implements Initializable {
     public static final int NUMBER_OF_BASKETS = 4; // total amount of baskets for teams
     public static final int TEAMS_IN_BASKET = 8; // total amount of teams in a single basket
 
+    public static final int NUMBER_OF_GROUPS = 8;
+    public static final int TEAMS_IN_GROUPS = 4;
+
     // styles for different button states
     private static final String BUTTON_DISABLED_STYLE = "-fx-base: #444444; -fx-text-fill: #333333;";
     private static final String BUTTON_ENABLED_STYLE = "-fx-base: #000000; -fx-text-fill: #FFFFFF;";
@@ -57,23 +60,23 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("HWDP");
-        initializeFields();
-        setDefaultTeams();
-    }
-
-    @FXML
-    protected void handleDrawButton() {
-    }
-
-    @FXML
-    protected void handleQuickDrawButton() throws InterruptedException {
-        disableAllDrawButtons(true);
+        teams = new HashMap<>();
+//        draw = new Draw();
 
         // instantiate all ObservableLists for team names in groups
         for (int i = 0; i < TEAMS_IN_BASKET; i++) {
+            observableListBasket[i] = FXCollections.observableArrayList();
+        }
+
+        for (int i = 0; i < TEAMS_IN_GROUPS; i++) {
             observableListGroup[i] = FXCollections.observableArrayList();
         }
+
+        // bind array of ObservableLists of each basket to baskets ListView's
+        basket1.setItems(observableListBasket[0]);
+        basket2.setItems(observableListBasket[1]);
+        basket3.setItems(observableListBasket[2]);
+        basket4.setItems(observableListBasket[3]);
 
         // binding ObservableList with names of teams and ListView
         groupA.setItems(observableListGroup[0]);
@@ -85,6 +88,17 @@ public class SceneController implements Initializable {
         groupG.setItems(observableListGroup[6]);
         groupH.setItems(observableListGroup[7]);
 
+        setDefaultTeams();
+    }
+
+    @FXML
+    protected void handleDrawButton() {
+    }
+
+    @FXML
+    protected void handleQuickDrawButton() throws InterruptedException {
+        disableAllDrawButtons(true);
+
         draw.start();
     }
 
@@ -94,11 +108,6 @@ public class SceneController implements Initializable {
         cleanLists();
 
         disableAllDrawButtons(false);
-    }
-
-    private void initializeFields() {
-        teams = new HashMap<>();
-        draw = new Draw();
     }
 
     private void setHost(Team team) {
