@@ -1,22 +1,26 @@
 package sample.controllers;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import sample.classes.draw.Draw;
+import sample.classes.basket.Basket;
+import sample.classes.threads.Draw;
+import sample.classes.threads.tasks.FillBasketService;
+import sample.classes.team.Continent;
 import sample.classes.team.Team;
 
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SceneController implements Initializable {
-    // TODO? put baskets and groups into an array, for later letting the user to choose
-    // the number of baskets and groups and so that they can be iterated on?
+    // TODO? put baskets and groupsListViews into an array, for later letting the user to choose
+    // the number of baskets and groupsListViews and so that they can be iterated on?
     @FXML private ListView<String> basket1;
     @FXML private ListView<String> basket2;
     @FXML private ListView<String> basket3;
@@ -35,23 +39,35 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupG;
     @FXML private ListView<String> groupH;
 
-    // TODO check if it's okay to instantiate this way
-    // arrays for observable lists that bind to baskets and groups ListView's
-    private ObservableList<String>[] observableListBasket = new ObservableList[4];
-    private ObservableList<String>[] observableListGroup = new ObservableList[8];
+    private ListView<String>[] basketsListViews;
+    private ListView<String>[] groupsListViews;
+
+    private Basket[] baskets;
+    private HashMap<Integer, ListView<String>> basketMap;
+
+    // arrays for observable lists that bind to baskets and groupsListViews ListView's
+    private ObservableList<String>[] observableListBasket;
+    private ObservableList<String>[] observableListGroup;
+
     // all teams sorted in ascending order - corresponding to their fifa rank + 1
     // 1st place is always taken by the host
-    private Map<String, Team> teams;
+    private ArrayList<Team> teams;
     private Team host;
 
-    private Draw draw;
+    private final ExecutorService executor = Executors.newFixedThreadPool(2, r -> {
+        Thread t = new Thread(r);
+        t.setDaemon(true);
+        return t;
+    });
 
     // TODO should be more universal
     public static final int NUMBER_OF_BASKETS = 4; // total amount of baskets for teams
     public static final int TEAMS_IN_BASKET = 8; // total amount of teams in a single basket
-
     public static final int NUMBER_OF_GROUPS = 8;
-    public static final int TEAMS_IN_GROUPS = 4;
+    public static final int TEAMS_IN_GROUP = 4;
+
+    // the initial size of the team ArrayList (should be equal to the amount of pre added teams)
+    private static final int INITIAL_TEAMS_AMOUNT = 32;
 
     // styles for different button states
     private static final String BUTTON_DISABLED_STYLE = "-fx-base: #444444; -fx-text-fill: #333333;";
@@ -60,35 +76,69 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        teams = new HashMap<>();
-//        draw = new Draw();
+        baskets = new Basket[NUMBER_OF_BASKETS];
+        basketsListViews = new ListView[NUMBER_OF_BASKETS];
+        groupsListViews = new ListView[NUMBER_OF_GROUPS];
 
-        // instantiate all ObservableLists for team names in groups
-        for (int i = 0; i < TEAMS_IN_BASKET; i++) {
+        setDefaultTeams();
+        makeTeams();
+        setHost(new Team("Russia", 65, Continent.EUROPE));
+        putHost(getHost());
+        sortTeamsByValueDescending();
+
+        basketsListViews[0] = basket1;
+        basketsListViews[1] = basket2;
+        basketsListViews[2] = basket3;
+        basketsListViews[3] = basket4;
+
+        groupsListViews[0] = groupA;
+        groupsListViews[1] = groupB;
+        groupsListViews[2] = groupC;
+        groupsListViews[3] = groupD;
+        groupsListViews[4] = groupE;
+        groupsListViews[5] = groupF;
+        groupsListViews[6] = groupG;
+        groupsListViews[7] = groupH;
+
+        // TODO delete this
+        // instantiate all ObservableLists for team names in baskets
+        for (int i = 0; i < NUMBER_OF_BASKETS; i++) {
             observableListBasket[i] = FXCollections.observableArrayList();
         }
 
-        for (int i = 0; i < TEAMS_IN_GROUPS; i++) {
+        for (int i = 0; i < NUMBER_OF_GROUPS; i++) {
             observableListGroup[i] = FXCollections.observableArrayList();
         }
 
-        // bind array of ObservableLists of each basket to baskets ListView's
-        basket1.setItems(observableListBasket[0]);
-        basket2.setItems(observableListBasket[1]);
-        basket3.setItems(observableListBasket[2]);
-        basket4.setItems(observableListBasket[3]);
 
-        // binding ObservableList with names of teams and ListView
-        groupA.setItems(observableListGroup[0]);
-        groupB.setItems(observableListGroup[1]);
-        groupC.setItems(observableListGroup[2]);
-        groupD.setItems(observableListGroup[3]);
-        groupE.setItems(observableListGroup[4]);
-        groupF.setItems(observableListGroup[5]);
-        groupG.setItems(observableListGroup[6]);
-        groupH.setItems(observableListGroup[7]);
+        // neccessary because arrays don't support generics
+        List<Team>[] lists = (ArrayList<Team>[]) new ArrayList<?>[NUMBER_OF_BASKETS];
 
-        setDefaultTeams();
+        lists[0] = teams.subList(0, 9);
+        lists[1] = teams.subList(8, 17);
+        lists[2] = teams.subList(16, 25);
+        lists[3] = teams.subList(24, 33);
+
+        FillBasketService fillBasketService = new FillBasketService(baskets, lists);
+        fillBasketService.setOnSucceeded(event -> {
+            observableListBasket = fillBasketService.getValue();
+        });
+
+
+        List listView; // List that will view the teams list
+        Team[] teamsArray = new Team[TEAMS_IN_BASKET]; // for toArray call and Basket object argument
+
+        listView.toArray(teamsArray);
+        baskets[0] = new Basket(teamsArray);
+
+        listView.toArray(teamsArray);
+        baskets[1] = new Basket(teamsArray);
+
+        listView.toArray(teamsArray);
+        baskets[2] = new Basket(teamsArray);
+
+        listView.toArray(teamsArray);
+        baskets[3] = new Basket(teamsArray);
     }
 
     @FXML
@@ -99,7 +149,18 @@ public class SceneController implements Initializable {
     protected void handleQuickDrawButton() throws InterruptedException {
         disableAllDrawButtons(true);
 
-        draw.start();
+        Draw quickDraw = new Draw();
+
+        quickDraw.setOnSucceeded(new javafx.event.EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                // bind array containing teams in each basket to each basket's ListView
+                basket1.setItems(observableListBasket[0]);
+                basket2.setItems(observableListBasket[1]);
+                basket3.setItems(observableListBasket[2]);
+                basket4.setItems(observableListBasket[3]);
+            }
+        });
     }
 
     @FXML
@@ -112,9 +173,10 @@ public class SceneController implements Initializable {
 
     private void setHost(Team team) {
         host = team;
-        teams.put(team.getName(), team);
+    }
 
-        sortTeamsMapByValuesDescending();
+    private void putHost(Team team) {
+        teams.add(0, team);
     }
 
     private Team getHost() {
@@ -197,10 +259,10 @@ public class SceneController implements Initializable {
     }
 
     /**
-     * If the {@code value} argument is true, all draw buttons are disabled and their styles are
+     * If the {@code value} argument is true, all threads buttons are disabled and their styles are
      * changed to {@link #BUTTON_DISABLED_STYLE}, otherwise all buttons are enabled and their styles
      * are changed to {@link #BUTTON_ENABLED_STYLE}.
-     * @param value boolean that decides whether all draw buttons are disabled or enabled
+     * @param value boolean that decides whether all threads buttons are disabled or enabled
      */
     private void disableAllDrawButtons(boolean value) {
         if (value) {
@@ -216,6 +278,8 @@ public class SceneController implements Initializable {
      * Instantiaties and initializes all teams
      */
     private void makeTeams() {
+        teams = new ArrayList<>(INITIAL_TEAMS_AMOUNT);
+        // TODO code for all team instances
     }
 
     private void cleanLists() {
@@ -224,16 +288,7 @@ public class SceneController implements Initializable {
         }
     }
 
-    Ordering<Map.Entry<String, Team>> byMapValues = new Ordering<Map.Entry<String, Team>>() {
-        @Override
-        public int compare(Map.Entry<String, Team> left, Map.Entry<String, Team> right) {
-            return left.getValue().compareTo(right.getValue()); // TODO check if it's working
-        }
-    };
-
-    public void sortTeamsMapByValuesDescending() {
-        // create a list of map entries
-        List<Map.Entry<String, Team>> _teams = Lists.newArrayList(teams.entrySet());
-        Collections.sort(_teams, byMapValues.reverse());
+    private void sortTeamsByValueDescending() { // todo remove
+        teams.sort(Collections.reverseOrder());
     }
 }
