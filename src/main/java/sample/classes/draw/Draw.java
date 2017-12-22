@@ -20,22 +20,21 @@ public class Draw extends Service<Void> {
     private HashMap<String, Team> teams;
     private AtomicInteger i = new AtomicInteger(0);
 
-
-    public void startDraw() {
-        createTask();
-    }
-
     /**
      * Injects fields sent from {@link SceneController} class.
      * @param baskets {@link SceneController#observableListBasket}
      * @param groups {@link SceneController#observableListGroup}
      * @param teams {@link SceneController#teams}
      */
-    public void injectFields(ObservableList<String>[] baskets, ObservableList<String>[] groups,
-                                    HashMap<String, Team> teams) {
+    public Draw(ObservableList<String>[] baskets, ObservableList<String>[] groups,
+                HashMap<String, Team> teams) {
         this.baskets = baskets;
         this.groups = groups;
         this.teams = teams;
+    }
+
+    public void startDraw() {
+        createTask();
     }
 
     @Override
