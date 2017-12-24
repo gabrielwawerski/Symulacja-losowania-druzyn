@@ -27,18 +27,16 @@ public class Basket {
         return teams[index];
     }
 
+    public Team getTeam() {
+        return teams[index > teams.length ? index = 0 : index++];
+    }
+
     public void putTeam(Team team) {
-        if (index > teams.length)
-            try {
-                throw new Exception("should this check be necessary?");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        teams[index++] = team;
+        teams[index > teams.length ? index = 0 : index++] = team;
     }
 
     public void putTeam(int index, Team team) {
-        teams[index] = team;
+        teams[index > teams.length ? 0 : this.index++] = team;
     }
 
     public Team[] getTeams() {
