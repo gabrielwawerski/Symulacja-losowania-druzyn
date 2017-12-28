@@ -1,6 +1,6 @@
 package sample.controllers;
 
-import javafx.beans.binding.Bindings;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import sample.classes.basket.Basket;
-import sample.classes.threads.FillBasketService;
+import sample.classes.threads.FillBasketTask;
 import sample.classes.team.Continent;
 import sample.classes.team.Team;
 
@@ -58,7 +58,13 @@ public class SceneController implements Initializable {
     private static final String BUTTON_ENABLED_STYLE = "-fx-base: #000000; -fx-text-fill: #FFFFFF;";
 
     List<List<Team>> teamsSubLists;
+    List<Team> subList1;
+    List<Team> subList2;
+    List<Team> subList3;
+    List<Team> subList4;
 
+    static int i = 0;
+    static FillBasketTask fillBasketTask;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         baskets = new Basket[NUMBER_OF_BASKETS];
@@ -85,16 +91,25 @@ public class SceneController implements Initializable {
         groupsListViews[7] = groupH;
 
         teamsSubLists = new ArrayList<>(NUMBER_OF_BASKETS);
-        List<Team> subList1 = new ArrayList<>(teams.subList(0, 9));
-        List<Team> subList2 = new ArrayList<>(teams.subList(8, 17));
-        List<Team> subList3 = new ArrayList<>(teams.subList(16, 25));
-        List<Team> subList4 = new ArrayList<>(teams.subList(24, 33));
+        subList1 = new ArrayList<>(teams.subList(0, 8));
+        subList2 = new ArrayList<>(teams.subList(8, 16));
+        subList3 = new ArrayList<>(teams.subList(16, 24));
+        subList4 = new ArrayList<>(teams.subList(24, 32));
 
         teamsSubLists.add(subList1);
         teamsSubLists.add(subList2);
         teamsSubLists.add(subList3);
         teamsSubLists.add(subList4);
 
+        // put teams to baskets
+        for ( ; i < NUMBER_OF_BASKETS; i++) {
+            for (int j = 0; j < MAX_BASKET_CAPACITY; j++) {
+                baskets[i].putTeam(teamsSubLists.get(i).get(j));
+            }
+            System.out.println("i = " + i);
+            baskets[i].setObservableLists(FXCollections.observableArrayList(baskets[i].getCurrentTeamNames()));
+        }
+        System.out.println("i POZA LOOP = " + i);
         // TODO not quite correct - figure out how to do setOnSucceeded and generally where to initialize FillBasketTask - or maybe swap it to Service or some other thing...
         // lookup how to make an object that encapsulates Task, which returns it's value and can be reseted
 
@@ -104,36 +119,17 @@ public class SceneController implements Initializable {
         // task for putting teams to groups
 
         // task that handles ui events - moving teams
+        System.out.println("Initialized correctly.");
     }
 
     @FXML
     protected void handleDrawButton() {
     }
 
+
     @FXML
     protected void handleQuickDrawButton() throws InterruptedException {
         disableAllDrawButtons(true);
-
-        FillBasketService fillBasketService = new FillBasketService(baskets, teamsSubLists);
-
-        fillBasketService.setOnSucceeded(event -> {
-            baskets[0].getListView().setItems(fillBasketService.getValue());
-            System.out.println("Succeeded");
-        });
-
-        fillBasketService.setOnFailed(event -> {
-            System.out.println("Failed.");
-        });
-
-        baskets[0].getListView().itemsProperty().bind(Bindings.createObjectBinding(
-                fillBasketService::getValue));
-        baskets[1].getListView().itemsProperty().bind(Bindings.createObjectBinding(
-                fillBasketService::getValue));
-        baskets[2].getListView().itemsProperty().bind(Bindings.createObjectBinding(
-                fillBasketService::getValue));
-        baskets[3].getListView().itemsProperty().bind(Bindings.createObjectBinding(
-                fillBasketService::getValue));
-        fillBasketService.startDraw();
     }
 
     @FXML
