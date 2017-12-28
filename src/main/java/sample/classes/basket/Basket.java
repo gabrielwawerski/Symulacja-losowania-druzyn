@@ -1,7 +1,6 @@
 package sample.classes.basket;
 
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import sample.classes.team.Team;
 import sample.controllers.SceneController;
@@ -17,12 +16,12 @@ public class Basket {
 
     public Basket(ListView<String> listView) {
         this.listView = listView;
-        teams = new Team[SceneController.NUMBER_OF_BASKETS];
+        teams = new Team[SceneController.MAX_BASKET_CAPACITY];
         index = 0;
     }
 
     public Team getTeam(int index) {
-        if (index > SceneController.MAX_BASKET_CAPACITY)
+        if (index > SceneController.MAX_BASKET_CAPACITY - 1)
             throw new IllegalArgumentException("Wrong index for teams array. Found:" + index);
         return teams[index];
     }
@@ -32,11 +31,16 @@ public class Basket {
     }
 
     public void putTeam(Team team) {
-        teams[index > teams.length ? index = 0 : index++] = team;
+        teams[index++] = team;
     }
 
     public void putTeam(int index, Team team) {
-        teams[index > teams.length ? 0 : this.index++] = team;
+        teams[index > teams.length ? this.index = 0 : this.index++] = team;
+    }
+
+    public void emptyBasket() {
+        teams = new Team[SceneController.MAX_BASKET_CAPACITY];
+        index = 0;
     }
 
     public Team[] getTeams() {
@@ -73,5 +77,6 @@ public class Basket {
 
     public void setObservableLists(ObservableList<String> observableList) {
         this.observableList = observableList;
+        listView.setItems(this.observableList);
     }
 }

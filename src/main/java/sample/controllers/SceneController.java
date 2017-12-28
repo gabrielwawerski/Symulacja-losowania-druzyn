@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import sample.classes.basket.Basket;
+import sample.classes.group.Group;
 import sample.classes.threads.FillBasketTask;
 import sample.classes.team.Continent;
 import sample.classes.team.Team;
@@ -36,16 +37,14 @@ public class SceneController implements Initializable {
     @FXML private ListView<String> groupG;
     @FXML private ListView<String> groupH;
 
-    private ListView<String>[] basketsListViews;
-    private ListView<String>[] groupsListViews;
     private Basket[] baskets;
-    // arrays for observable lists that bind to baskets and groupsListViews ListView's
-    private ObservableList<String>[] observableListBasket;
-    private ObservableList<String>[] observableListGroup;
     // all teams sorted in ascending order - corresponding to their fifa rank + 1
     // 1st place is always taken by the host
     private ArrayList<Team> teams;
     private Team host;
+
+    private Group[] groups;
+
     // TODO should be more universal
     public static final int NUMBER_OF_BASKETS = 4; // total amount of baskets for teams
     public static final int MAX_BASKET_CAPACITY = 8; // total amount of teams in a single basket
@@ -63,13 +62,10 @@ public class SceneController implements Initializable {
     List<Team> subList3;
     List<Team> subList4;
 
-    static int i = 0;
-    static FillBasketTask fillBasketTask;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         baskets = new Basket[NUMBER_OF_BASKETS];
-        basketsListViews = new ListView[NUMBER_OF_BASKETS];
-        groupsListViews = new ListView[NUMBER_OF_GROUPS];
+        groups = new Group[NUMBER_OF_GROUPS];
 
         makeTeams();
         setHost(new Team("Russia", 65, Continent.EUROPE));
@@ -81,14 +77,14 @@ public class SceneController implements Initializable {
         baskets[2] = new Basket(basket3);
         baskets[3] = new Basket(basket4);
 
-        groupsListViews[0] = groupA;
-        groupsListViews[1] = groupB;
-        groupsListViews[2] = groupC;
-        groupsListViews[3] = groupD;
-        groupsListViews[4] = groupE;
-        groupsListViews[5] = groupF;
-        groupsListViews[6] = groupG;
-        groupsListViews[7] = groupH;
+        groups[0] = new Group();
+        groups[1] = new Group();
+        groups[2] = new Group();
+        groups[3] = new Group();
+        groups[4] = new Group();
+        groups[5] = new Group();
+        groups[6] = new Group();
+        groups[7] = new Group();
 
         teamsSubLists = new ArrayList<>(NUMBER_OF_BASKETS);
         subList1 = new ArrayList<>(teams.subList(0, 8));
@@ -102,22 +98,16 @@ public class SceneController implements Initializable {
         teamsSubLists.add(subList4);
 
         // put teams to baskets
-        for ( ; i < NUMBER_OF_BASKETS; i++) {
+        for (int i = 0 ; i < NUMBER_OF_BASKETS; i++) {
             for (int j = 0; j < MAX_BASKET_CAPACITY; j++) {
                 baskets[i].putTeam(teamsSubLists.get(i).get(j));
             }
-            System.out.println("i = " + i);
             baskets[i].setObservableLists(FXCollections.observableArrayList(baskets[i].getCurrentTeamNames()));
         }
-        System.out.println("i POZA LOOP = " + i);
         // TODO not quite correct - figure out how to do setOnSucceeded and generally where to initialize FillBasketTask - or maybe swap it to Service or some other thing...
         // lookup how to make an object that encapsulates Task, which returns it's value and can be reseted
-
-
         // task for assigning teams to baskets
-
         // task for putting teams to groups
-
         // task that handles ui events - moving teams
         System.out.println("Initialized correctly.");
     }
@@ -126,17 +116,34 @@ public class SceneController implements Initializable {
     protected void handleDrawButton() {
     }
 
-
     @FXML
-    protected void handleQuickDrawButton() throws InterruptedException {
+    protected void handleQuickDrawButton() {
         disableAllDrawButtons(true);
+
+        for (int i = 0; i < NUMBER_OF_GROUPS; i++) {
+            for (int j = 0; j < NUMBER_OF_BASKETS; j++) {
+                for (int k = 0; k < MAX_BASKET_CAPACITY; k++) {
+                    groups[i].putTeam(baskets[j].getTeam(k));
+                }
+            }
+        }
     }
 
     @FXML
     protected void handleResetButton() {
         cleanLists();
-
+        fillBaskets();
         disableAllDrawButtons(false);
+    }
+
+    private void fillBaskets() {
+        for (int i = 0 ; i < NUMBER_OF_BASKETS; i++) {
+            baskets[i].emptyBasket();
+            for (int j = 0; j < MAX_BASKET_CAPACITY; j++) {
+                baskets[i].putTeam(teamsSubLists.get(i).get(j));
+            }
+            baskets[i].setObservableLists(FXCollections.observableArrayList(baskets[i].getCurrentTeamNames()));
+        }
     }
 
     private void setHost(Team team) {
@@ -149,47 +156,6 @@ public class SceneController implements Initializable {
 
     private Team getHost() {
         return host;
-    }
-
-    @Deprecated
-    private void setDefaultTeams() {
-        observableListBasket[0]
-                = FXCollections.observableArrayList("Rosja", "Niemcy",
-                "Brazylia", "Portugalia",
-                "Argentyna", "Belgia",
-                "Polska", "Francja");
-        basket1.setItems(observableListBasket[0]);
-
-        observableListBasket[1]
-                = FXCollections.observableArrayList("Hiszpania", "Peru",
-                "Szwajcaria", "Anglia",
-                "Kolumbia", "Meksyk",
-                "Urugwaj", "Chorwacja");
-        basket2.setItems(observableListBasket[1]);
-
-        observableListBasket[2]
-                = FXCollections.observableArrayList("Dania", "Islandia",
-                "Kostaryka", "Szwecja",
-                "Tunezja", "Egipt",
-                "Senegal", "Iran");
-        basket3.setItems(observableListBasket[2]);
-
-        observableListBasket[3]
-                = FXCollections.observableArrayList("Serbia", "Nigeria",
-                "Australia", "Japonia",
-                "Maroko", "Panama",
-                "Korea Południowa", "Arabia Saudyjska");
-        basket4.setItems(observableListBasket[3]);
-    }
-
-    /**
-     * @see #setButtonStyle(Button, String)
-     * @see #setButtonsStyle(String, Button...)
-     */
-    @Deprecated
-    private void setDisabledStyleAndOnAction(Button button) {
-        button.setOnAction(null);
-        quickDrawButton.setStyle(BUTTON_DISABLED_STYLE);
     }
 
     /**

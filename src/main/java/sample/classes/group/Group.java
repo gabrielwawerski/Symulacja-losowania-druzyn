@@ -1,65 +1,93 @@
 package sample.classes.group;
 
-import sample.classes.group.score.Score;
+import sample.classes.team.Continent;
 import sample.classes.team.Team;
+import sample.controllers.SceneController;
 
 public class Group {
-    private TeamBundle[] teamBundle;
-    private int teamCount = 0;
-    private int europeTeamCounter = 0;
+    private Team[] teams;
+    private int index;
 
-    private static final int MAX_TEAM_SIZE = 4;
+    // ASIA, AFRICA, NORTH_AMERICA, SOUTH_AMERICA, EUROPE, AUSTRALIA_OCEANIA
+    private int teamCount;
+    private int asianTeams;
+    private int africanTeams;
+    private int northAmericanTeams;
+    private int southAmericanTeams;
+    private int europeanTeams;
+    private int australiaOceaniaTeams;
+
+    private static final int MAX_OTHER_CONTINENTS_TEAMS = 1;
+
     private static final int MAX_EUROPE_TEAMS = 2;
 
     public Group() {
-        teamBundle[0] = new TeamBundle();
-        teamBundle[1] = new TeamBundle();
-        teamBundle[2] = new TeamBundle();
-        teamBundle[3] = new TeamBundle();
-    }
+        teams = new Team[SceneController.MAX_GROUP_CAPACITY];
+        index = 0;
 
-    public Group(Team team1, Team team2, Team team3, Team team4) {
-        teamBundle[0] = new TeamBundle(team1);
-        teamBundle[1] = new TeamBundle(team2);
-        teamBundle[2] = new TeamBundle(team3);
-        teamBundle[3] = new TeamBundle(team4);
-    }
-
-    public Team[] getAllTeams() {
-        Team[] teams = new Team[4];
-        for (int i = 0; i < teamBundle.length; i++)
-            teams[i] = teamBundle[i].getTeam();
-        return teams;
+        asianTeams = 0;
+        africanTeams = 0;
+        northAmericanTeams = 0;
+        southAmericanTeams = 0;
+        europeanTeams = 0;
+        australiaOceaniaTeams = 0;
     }
 
     public void putTeam(Team team) {
-        if (teamCount > MAX_TEAM_SIZE)
-            throw new UnsupportedOperationException("Max group size is " + MAX_TEAM_SIZE);
-        teamBundle[teamCount++].team = team;
+        incrementContinentCounter(team.getContinent());
+        teams[index] = team;
+        index++;
     }
 
+//    public boolean validateTeamContinent() {
+//
+//    }
 
-    private class TeamBundle {
-        private Team team;
-        private Score score;
+    private void incrementContinentCounter(Continent continent) {
+        if (continent == Continent.ASIA)
+            asianTeams++;
 
-        TeamBundle() {
-            score = new Score();
-        }
+        if (continent == Continent.AFRICA)
+            africanTeams++;
 
-        TeamBundle(Team team) {
-            this.team = team;
-            score = new Score();
-        }
+        if (continent == Continent.NORTH_AMERICA)
+            northAmericanTeams++;
 
+        if (continent == Continent.SOUTH_AMERICA) // 792 179 302
+            southAmericanTeams++;
 
+        if (continent == Continent.EUROPE)
+            europeanTeams++;
 
-        Team getTeam() {
-            return team;
-        }
+        if (continent == Continent.AUSTRALIA_OCEANIA)
+            australiaOceaniaTeams++;
+    }
 
-        Score getScore() {
-            return score;
-        }
+    public int getTeamCount() {
+        return teamCount;
+    }
+
+    public int getAsianTeams() {
+        return asianTeams;
+    }
+
+    public int getAfricanTeams() {
+        return africanTeams;
+    }
+
+    public int getNorthAmericanTeams() {
+        return northAmericanTeams;
+    }
+
+    public int getSouthAmericanTeams() {
+        return southAmericanTeams;
+    }
+
+    public int getEuropeanTeams() {
+        return europeanTeams;
+    }
+
+    public int getAustraliaOceaniaTeams() {
+        return australiaOceaniaTeams;
     }
 }
