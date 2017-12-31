@@ -122,7 +122,7 @@ public class SceneController implements Initializable {
 
         for (int i = 0; i < NUMBER_OF_GROUPS; i++) {
             for (int j = 0; j < NUMBER_OF_BASKETS; j++) {
-                for (int k = 0; k < MAX_BASKET_CAPACITY; k++) {
+                for (int k = 0; k < MAX_GROUP_CAPACITY; k++) {
                     groups[i].putTeam(baskets[j].getTeam(k));
                 }
             }
